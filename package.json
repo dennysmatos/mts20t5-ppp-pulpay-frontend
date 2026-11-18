@@ -1,0 +1,37 @@
+{
+  "name": "ppp-pulpay-frontend",
+  "version": "1.0.0",
+  "description": "Pulsar Payments Web Frontend - Hub de Pagamentos, Gestão de Carteiras e Conciliação com Webhooks (Mentoria 2.0 - Turma 5)",
+  "main": "src/server.js",
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test --test-concurrency=1 'tests/**/*.test.js'",
+    "test:coverage": "node --test --test-concurrency=1 --experimental-test-coverage 'tests/**/*.test.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dennysmatos/ppp-pulpay-frontend.git"
+  },
+  "keywords": [
+    "payments",
+    "webhooks",
+    "reconciliation",
+    "frontend-web",
+    "bulma-css",
+    "express",
+    "qa-automation",
+    "mentoria-2.0"
+  ],
+  "author": "Dennys Matos <dennysmatos@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bulma": "^1.0.2",
+    "express": "^4.21.2",
+    "morgan": "^1.10.0"
+  }
+}
