@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light" class="has-navbar-fixed-top">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pulsar Payments — Hub de Pagamentos, Carteiras e Conciliação</title>
+  <!-- Bulma CSS Framework -->
+  <link rel="stylesheet" href="/vendor/bulma/bulma.min.css" />
+  <!-- Estilos Customizados Pulsar Payments -->
+  <link rel="stylesheet" href="/css/styles.css" />
+  <!-- Configuração Dinâmica de Ambiente (VITE_API_BASE_URL) -->
+  <script src="/config.js"></script>
+</head>
+<body class="has-navbar-fixed-top">
+  <!-- Barra de Navegação Superior Fixa no Topo -->
+  <nav class="navbar is-pulsar is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/dashboard" data-nav="/dashboard" data-testid="nav-brand">
+          <span class="pulsar-logo-badge">P</span>
+          <span><strong>Pulsar Payments</strong> <small class="has-text-grey-light is-size-7 ml-1">Hub &amp; Webhooks</small></span>
+        </a>
+
+        <a role="button" class="navbar-burger has-text-white" aria-label="menu" aria-expanded="false" data-target="pulsarNavbar" id="navbar-burger-btn">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="pulsarNavbar" class="navbar-menu">
+        <!-- Menu Privado (exibido apenas quando autenticado) -->
+        <div class="navbar-start" id="nav-authenticated-links">
+          <a class="navbar-item" href="/dashboard" data-nav="/dashboard" data-testid="nav-dashboard">
+            Visão Geral
+          </a>
+          <a class="navbar-item" href="/accounts" data-nav="/accounts" data-testid="nav-accounts">
+            Carteiras
+          </a>
+          <a class="navbar-item" href="/transactions" data-nav="/transactions" data-testid="nav-transactions">
+            Transações &amp; Conciliação
+          </a>
+          <a class="navbar-item" href="/webhooks" data-nav="/webhooks" data-testid="nav-webhooks">
+            Webhooks &amp; HMAC
+          </a>
+        </div>
+
+        <div class="navbar-end">
+          <!-- Botão de Alternância de Tema (Light / Dark Mode) -->
+          <div class="navbar-item">
+            <button
+              type="button"
+              id="btn-theme-toggle"
+              class="button is-small is-theme-toggle"
+              aria-label="Alternar tema claro ou escuro"
+              title="Alternar tema (Claro / Escuro)"
+              data-testid="btn-theme-toggle"
+            >
+              <span id="theme-toggle-icon" aria-hidden="true">🌙</span>
+              <span id="theme-toggle-label" class="ml-1">Modo Escuro</span>
+            </button>
+          </div>
+
+          <!-- Informações do Lojista Autenticado -->
+          <div class="navbar-item" id="nav-merchant-info">
+            <div class="buttons">
+              <span class="tag is-dark is-medium mr-2" data-testid="merchant-header-info" id="merchant-display-name">
+                Lojista
+              </span>
+              <button type="button" class="button is-small is-danger is-light" id="btn-logout" data-testid="btn-logout">
+                Sair da Conta
+              </button>
+            </div>
+          </div>
+
+          <!-- Links Públicos (exibidos apenas quando não autenticado) -->
+          <div class="navbar-item is-hidden" id="nav-guest-links">
+            <div class="buttons">
+              <a class="button is-small is-light" href="/login" data-nav="/login" data-testid="nav-login">
+                Entrar
+              </a>
+              <a class="button is-small is-primary" href="/register" data-nav="/register" data-testid="nav-register">
+                Criar Conta de Lojista
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Container Principal -->
+  <main class="section pt-5 pb-6">
+    <div class="container">
+      <!-- Área Global de Alertas de Erro e Feedback (RN-FE-01, RN-FE-03, a11y) -->
+      <div class="global-alerts-container">
+        <div
+          id="global-error-alert"
+          class="notification is-danger is-light is-hidden"
+          role="alert"
+          aria-live="assertive"
+          data-testid="alert-error-message"
+        >
+          <button type="button" class="delete" id="btn-close-error-alert" aria-label="Fechar alerta de erro"></button>
+          <div class="is-flex is-align-items-center">
+            <strong class="mr-2" id="global-error-code">Erro:</strong>
+            <span id="global-error-text"></span>
+          </div>
+        </div>
+
+        <div
+          id="global-success-alert"
+          class="notification is-success is-light is-hidden"
+          role="status"
+          aria-live="polite"
+          data-testid="alert-success-message"
+        >
+          <button type="button" class="delete" id="btn-close-success-alert" aria-label="Fechar notificação"></button>
+          <span id="global-success-text" class="has-text-weight-semibold"></span>
+        </div>
+
+        <!-- Banner de Replay Idempotente (RN-FE-08: 200 OK idempotentReplayed: true) -->
+        <div
+          id="banner-idempotent-replay"
+          class="notification is-warning is-light is-hidden"
+          role="alert"
+          aria-live="polite"
+          data-testid="banner-idempotent-replay"
+        >
+          <button type="button" class="delete" id="btn-close-idempotent-banner" aria-label="Fechar aviso de idempotência"></button>
+          <p class="has-text-weight-bold mb-1">
+            ⚠️ Replay Idempotente Detectado (200 OK — Sem Duplicação Financeira)
+          </p>
+          <p id="banner-idempotent-text">
+            Requisição idempotente: retornando transação processada anteriormente. O saldo da carteira foi preservado e não sofreu débito/crédito duplicado.
+          </p>
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- VIEW 1: AUTENTICAÇÃO (/login e /register) - RN-FE-04 e RN-FE-05    -->
+      <!-- =================================================================== -->
+      <section id="view-auth" class="is-hidden" aria-label="Autenticação de Lojista">
+        <div class="auth-wrapper">
+          <div class="auth-card">
+            <div class="auth-card-header">
+              <p class="title is-4 has-text-white mb-1" id="auth-title">Acesso do Lojista</p>
+              <p class="subtitle is-6 has-text-grey-lighter mb-0" id="auth-subtitle">
+                Gerencie suas carteiras BRL, cobranças, conciliação e webhooks
+              </p>
+            </div>
+
+            <div class="auth-card-body">
+              <!-- Abas Login / Cadastro -->
+              <div class="tabs is-toggle is-fullwidth mb-5">
+                <ul>
+                  <li id="tab-login" class="is-active">
+                    <a href="/login" data-nav="/login" data-testid="tab-auth-login">
+                      <span>Login (/login)</span>
+                    </a>
+                  </li>
+                  <li id="tab-register">
+                    <a href="/register" data-nav="/register" data-testid="tab-auth-register">
+                      <span>Cadastro (/register)</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Formulário Unificado de Autenticação (Login / Registro) com data-testid exigidos -->
+              <form id="form-auth" novalidate>
+                <!-- Campo Razão Social / Nome (Apenas em /register) -->
+                <div class="field is-hidden" id="field-register-name">
+                  <label class="label" for="input-name">Razão Social / Nome do Lojista *</label>
+                  <div class="control">
+                    <input
+                      id="input-name"
+                      name="name"
+                      type="text"
+                      class="input"
+                      placeholder="Ex.: Loja Estrela LTDA"
+                      autocomplete="organization"
+                      data-testid="input-name"
+                    />
+                  </div>
+                  <p class="help is-danger is-hidden" id="help-name" role="alert"></p>
+                </div>
+
+                <!-- Campo E-mail -->
+                <div class="field">
+                  <label class="label" for="input-email">E-mail Corporativo *</label>
+                  <div class="control">
+                    <input
+                      id="input-email"
+                      name="email"
+                      type="email"
+                      class="input"
+                      placeholder="financeiro@lojaestrela.com.br"
+                      autocomplete="email"
+                      required
+                      data-testid="input-email"
+                    />
+                  </div>
+                  <p class="help is-danger is-hidden" id="help-email" role="alert"></p>
+                </div>
+
+                <!-- Campo Documento CNPJ/CPF (Apenas em /register) -->
+                <div class="field is-hidden" id="field-register-document">
+                  <label class="label" for="input-document">Documento (CNPJ ou CPF) <span class="has-text-grey is-size-7">(Opcional)</span></label>
+                  <div class="control">
+                    <input
+                      id="input-document"
+                      name="document"
+                      type="text"
+                      class="input"
+                      placeholder="00.000.000/0000-00 ou 000.000.000-00"
+                      maxlength="18"
+                      data-testid="input-document"
+                    />
+                  </div>
+                  <p class="help has-text-grey">Máscara aplicada automaticamente para CPF ou CNPJ.</p>
+                </div>
+
+                <!-- Campo Senha -->
+                <div class="field">
+                  <label class="label" for="input-password">Senha *</label>
+                  <div class="control">
+                    <input
+                      id="input-password"
+                      name="password"
+                      type="password"
+                      class="input"
+                      placeholder="Mínimo de 6 caracteres"
+                      autocomplete="current-password"
+                      required
+                      data-testid="input-password"
+                    />
+                  </div>
+                  <p class="help is-danger is-hidden" id="help-password" role="alert" aria-live="polite"></p>
+                </div>
+
+                <!-- Botão de Submissão -->
+                <div class="field mt-5">
+                  <div class="control">
+                    <button
+                      type="submit"
+                      id="btn-submit-auth"
+                      class="button is-link is-fullwidth is-medium has-text-weight-bold"
+                      data-testid="btn-submit-auth"
+                    >
+                      Entrar
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <hr class="my-4" />
+              <div class="has-text-centered is-size-7 has-text-grey">
+                <p id="auth-switch-prompt">
+                  Ainda não possui conta? <a href="/register" data-nav="/register" class="has-text-link has-text-weight-semibold">Cadastre seu lojista</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- VIEW 2: DASHBOARD (/dashboard)                                      -->
+      <!-- =================================================================== -->
+      <section id="view-dashboard" class="is-hidden" aria-label="Painel de Controle">
+        <div class="level mb-5">
+          <div class="level-left">
+            <div>
+              <h1 class="title is-3 mb-1">Dashboard Financeiro</h1>
+              <p class="subtitle is-6 has-text-grey" id="dashboard-merchant-welcome">
+                Resumo consolidado das carteiras, liquidações e webhooks
+              </p>
+            </div>
+          </div>
+          <div class="level-right">
+            <div class="buttons">
+              <button type="button" class="button is-light" id="btn-refresh-dashboard" data-testid="btn-refresh-dashboard">
+                🔄 Atualizar Dados
+              </button>
+              <a href="/accounts" data-nav="/accounts" class="button is-primary" data-testid="btn-dash-accounts">
+                Gerenciar Carteiras
+              </a>
+              <a href="/transactions" data-nav="/transactions" class="button is-link" data-testid="btn-dash-transactions">
+                Nova Transação
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- KPIs -->
+        <div class="columns is-multiline mb-5">
+          <div class="column is-3">
+            <div class="kpi-box">
+              <p class="kpi-label">Saldo Consolidado (BRL)</p>
+              <p class="kpi-value has-text-success-dark" id="kpi-total-balance" data-testid="kpi-total-balance">R$ 0,00</p>
+              <p class="is-size-7 has-text-grey mt-1">Soma das carteiras ativas</p>
+            </div>
+          </div>
+          <div class="column is-3">
+            <div class="kpi-box">
+              <p class="kpi-label">Carteiras Cadastradas</p>
+              <p class="kpi-value" id="kpi-total-accounts" data-testid="kpi-total-accounts">0</p>
+              <p class="is-size-7 has-text-grey mt-1">Isoladas por lojista</p>
+            </div>
+          </div>
+          <div class="column is-3">
+            <div class="kpi-box">
+              <p class="kpi-label">Transações Processadas</p>
+              <p class="kpi-value" id="kpi-total-transactions" data-testid="kpi-total-transactions">0</p>
+              <p class="is-size-7 has-text-grey mt-1" id="kpi-paid-breakdown">0 liquidadas (PAID)</p>
+            </div>
+          </div>
+          <div class="column is-3">
+            <div class="kpi-box">
+              <p class="kpi-label">Endpoints de Webhook</p>
+              <p class="kpi-value" id="kpi-total-webhooks" data-testid="kpi-total-webhooks">0</p>
+              <p class="is-size-7 has-text-grey mt-1">Assinatura HMAC SHA-256</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="columns">
+          <!-- Resumo de Carteiras no Dashboard -->
+          <div class="column is-5">
+            <div class="pulsar-panel">
+              <div class="level is-mobile mb-3">
+                <div class="level-left">
+                  <h2 class="title is-5 mb-0">Suas Carteiras (BRL)</h2>
+                </div>
+                <div class="level-right">
+                  <a href="/accounts" data-nav="/accounts" class="button is-small is-link is-light">Ver todas</a>
+                </div>
+              </div>
+              <div id="dashboard-accounts-list"></div>
+            </div>
+          </div>
+
+          <!-- Últimas Transações no Dashboard -->
+          <div class="column is-7">
+            <div class="pulsar-panel">
+              <div class="level is-mobile mb-3">
+                <div class="level-left">
+                  <h2 class="title is-5 mb-0">Movimentações Recentes</h2>
+                </div>
+                <div class="level-right">
+                  <a href="/transactions" data-nav="/transactions" class="button is-small is-link is-light">Conciliação completa</a>
+                </div>
+              </div>
+              <div id="dashboard-transactions-list"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- VIEW 3: CARTEIRAS (/accounts) - RN-FE-06 e RN-FE-07                 -->
+      <!-- =================================================================== -->
+      <section id="view-accounts" class="is-hidden" aria-label="Gestão de Contas e Carteiras">
+        <div class="level mb-5">
+          <div class="level-left">
+            <div>
+              <h1 class="title is-3 mb-1">Gestão de Contas / Carteiras</h1>
+              <p class="subtitle is-6 has-text-grey">
+                Crie e consulte carteiras operacionais em Real Brasileiro (BRL) com trava contra saldo negativo
+              </p>
+            </div>
+          </div>
+          <div class="level-right">
+            <button
+              type="button"
+              id="btn-toggle-new-account"
+              class="button is-primary has-text-weight-semibold"
+              data-testid="btn-open-new-account"
+            >
+              + Nova Carteira
+            </button>
+          </div>
+        </div>
+
+        <div class="columns is-variable is-5">
+          <!-- Formulário de Criação de Nova Carteira (RN-FE-07) -->
+          <div class="column is-4">
+            <div class="pulsar-panel" id="panel-create-account">
+              <h2 class="title is-5 mb-3">Criar Nova Carteira</h2>
+              <form id="form-create-account" novalidate>
+                <div class="field">
+                  <label class="label" for="input-account-name">Nome da Carteira <span class="has-text-grey is-size-7">(Opcional)</span></label>
+                  <div class="control">
+                    <input
+                      id="input-account-name"
+                      name="name"
+                      type="text"
+                      class="input"
+                      placeholder="Padrão: Conta Principal"
+                      data-testid="input-account-name"
+                    />
+                  </div>
+                  <p class="help has-text-grey">
+                    Se deixado em branco, assumirá automaticamente o padrão <strong>"Conta Principal"</strong>.
+                  </p>
+                </div>
+
+                <div class="field">
+                  <label class="label" for="select-currency">Moeda Operacional *</label>
+                  <div class="control">
+                    <div class="select is-fullwidth">
+                      <select id="select-currency" name="currency" data-testid="select-currency">
+                        <option value="BRL" selected>BRL — Real Brasileiro (Padrão)</option>
+                        <option value="USD">USD — Dólar Americano (Teste QA 422)</option>
+                        <option value="EUR">EUR — Euro (Teste QA 422)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <p class="help has-text-grey">
+                    O Pulsar Payments opera exclusivamente em <strong>BRL</strong>. Outras moedas permitem validar o contrato <code>422 UNSUPPORTED_CURRENCY</code>.
+                  </p>
+                </div>
+
+                <div class="field">
+                  <label class="label" for="input-initial-balance">Saldo Inicial (R$) *</label>
+                  <div class="control">
+                    <input
+                      id="input-initial-balance"
+                      name="initialBalance"
+                      type="number"
+                      step="0.01"
+                      value="0.00"
+                      class="input"
+                      placeholder="0.00"
+                      data-testid="input-initial-balance"
+                    />
+                  </div>
+                  <p class="help is-danger is-hidden" id="help-initial-balance" role="alert"></p>
+                  <p class="help has-text-grey">
+                    Valores negativos não são permitidos (<code>422 NEGATIVE_BALANCE_NOT_ALLOWED</code>).
+                  </p>
+                </div>
+
+                <div class="field mt-4">
+                  <div class="control">
+                    <button
+                      type="submit"
+                      id="btn-new-account"
+                      class="button is-primary is-fullwidth has-text-weight-bold"
+                      data-testid="btn-new-account"
+                    >
+                      Criar Carteira
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Listagem de Carteiras (RN-FE-06) -->
+          <div class="column is-8">
+            <div class="pulsar-panel">
+              <div class="level is-mobile mb-4">
+                <div class="level-left">
+                  <h2 class="title is-5 mb-0">Carteiras do Lojista (<span id="accounts-count-badge">0</span>)</h2>
+                </div>
+                <div class="level-right">
+                  <button type="button" class="button is-small is-light" id="btn-refresh-accounts" data-testid="btn-refresh-accounts">
+                    🔄 Atualizar Lista
+                  </button>
+                </div>
+              </div>
+
+              <!-- Container de Cards de Carteiras ou Empty State -->
+              <div id="accounts-list-container"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- VIEW 4: TRANSAÇÕES E CONCILIAÇÃO (/transactions) - RN-FE-08 a 10    -->
+      <!-- =================================================================== -->
+      <section id="view-transactions" class="is-hidden" aria-label="Transações e Conciliação">
+        <div class="level mb-5">
+          <div class="level-left">
+            <div>
+              <h1 class="title is-3 mb-1">Transações &amp; Conciliação</h1>
+              <p class="subtitle is-6 has-text-grey">
+                Motor de pagamentos, cobranças, controle de Idempotency-Key e máquina de estados de estorno
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="columns is-variable is-5">
+          <!-- Formulário de Nova Transação (RN-FE-08) -->
+          <div class="column is-4">
+            <div class="pulsar-panel">
+              <h2 class="title is-5 mb-3">Nova Transação</h2>
+
+              <form id="form-create-transaction" novalidate>
+                <!-- Seleção de Carteira -->
+                <div class="field">
+                  <label class="label" for="select-account">Carteira (Account) *</label>
+                  <div class="control">
+                    <div class="select is-fullwidth">
+                      <select id="select-account" name="accountId" required data-testid="select-account">
+                        <option value="">Selecione uma carteira...</option>
+                      </select>
+                    </div>
+                  </div>
+                  <p class="help is-danger is-hidden" id="help-tx-account" role="alert"></p>
+                  <p class="help has-text-grey" id="selected-account-balance-hint"></p>
+                </div>
+
+                <!-- Tipo de Operação -->
+                <div class="field">
+                  <label class="label" for="select-transaction-type">Tipo de Operação *</label>
+                  <div class="control">
+                    <div class="select is-fullwidth">
+                      <select id="select-transaction-type" name="type" required data-testid="select-transaction-type">
+                        <optgroup label="Entrada (Crédito na Carteira)">
+                          <option value="CHARGE" selected>CHARGE — Cobrança (+ Crédito)</option>
+                          <option value="CREDIT">CREDIT — Crédito (+ Entrada)</option>
+                        </optgroup>
+                        <optgroup label="Saída (Débito da Carteira)">
+                          <option value="PAYMENT">PAYMENT — Pagamento (- Saída)</option>
+                          <option value="DEBIT">DEBIT — Débito (- Saída)</option>
+                        </optgroup>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Valor (amount) -->
+                <div class="field">
+                  <label class="label" for="input-transaction-amount">Valor da Operação (R$) *</label>
+                  <div class="control">
+                    <input
+                      id="input-transaction-amount"
+                      name="amount"
+                      type="number"
+                      step="0.01"
+                      min="0.01"
+                      placeholder="Ex.: 250.00"
+                      class="input"
+                      required
+                      data-testid="input-transaction-amount"
+                    />
+                  </div>
+                  <p class="help is-danger is-hidden" id="help-tx-amount" role="alert"></p>
+                </div>
+
+                <!-- Status Inicial (Apenas PAID, PENDING, FAILED) -->
+                <div class="field">
+                  <label class="label" for="select-transaction-status">Status Inicial *</label>
+                  <div class="control">
+                    <div class="select is-fullwidth">
+                      <select id="select-transaction-status" name="status" required data-testid="select-transaction-status">
+                        <option value="PAID" selected>PAID — Liquidada (Sensibiliza Saldo)</option>
+                        <option value="PENDING">PENDING — Pendente (Não altera saldo)</option>
+                        <option value="FAILED">FAILED — Falhou (Não altera saldo)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <p class="help has-text-grey">
+                    Nota: O status <code>REFUNDED</code> só é alcançado via operação de Estorno sobre transações <code>PAID</code>.
+                  </p>
+                </div>
+
+                <!-- Descrição -->
+                <div class="field">
+                  <label class="label" for="input-transaction-description">Descrição <span class="has-text-grey is-size-7">(Opcional)</span></label>
+                  <div class="control">
+                    <input
+                      id="input-transaction-description"
+                      name="description"
+                      type="text"
+                      class="input"
+                      placeholder="Ex.: Pedido #9841 - PIX"
+                      data-testid="input-transaction-description"
+                    />
+                  </div>
+                </div>
+
+                <!-- Chave de Idempotência (Idempotency-Key) -->
+                <div class="field">
+                  <div class="is-flex is-justify-content-space-between is-align-items-center mb-1">
+                    <label class="label mb-0" for="input-idempotency-key">Chave de Idempotência (Idempotency-Key)</label>
+                    <button
+                      type="button"
+                      id="btn-generate-idempotency"
+                      class="button is-ghost is-small p-0"
+                      title="Gerar nova chave UUID única"
+                      data-testid="btn-generate-idempotency"
+                    >
+                      🔄 Gerar novo UUID
+                    </button>
+                  </div>
+                  <div class="control">
+                    <input
+                      id="input-idempotency-key"
+                      name="idempotencyKey"
+                      type="text"
+                      class="input is-monospace"
+                      placeholder="UUID gerado automaticamente"
+                      data-testid="input-idempotency-key"
+                    />
+                  </div>
+                  <div class="mt-1">
+                    <label class="checkbox is-size-7 has-text-grey" for="checkbox-keep-idempotency">
+                      <input type="checkbox" id="checkbox-keep-idempotency" data-testid="checkbox-keep-idempotency" />
+                      Manter mesma chave após envio (Modo Teste QA de Replay Idempotente 200 OK)
+                    </label>
+                  </div>
+                </div>
+
+                <div class="field mt-4">
+                  <div class="control">
+                    <button
+                      type="submit"
+                      id="btn-create-transaction"
+                      class="button is-link is-fullwidth has-text-weight-bold"
+                      data-testid="btn-create-transaction"
+                    >
+                      Processar Transação
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Resumo de Disparos de Webhook na Transação -->
+              <div id="tx-webhook-deliveries-box" class="notification is-info is-light mt-4 is-hidden" role="status" aria-live="polite" data-testid="tx-webhook-deliveries-box">
+                <p class="has-text-weight-bold is-size-7 mb-1">🔔 Webhooks Disparados nesta Operação:</p>
+                <div id="tx-webhook-deliveries-content" class="is-size-7"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Listagem e Filtros Combinados de Transações (RN-FE-09 e RN-FE-10) -->
+          <div class="column is-8">
+            <div class="pulsar-panel">
+              <div class="level is-mobile mb-3">
+                <div class="level-left">
+                  <h2 class="title is-5 mb-0">Extrato &amp; Conciliação (<span id="transactions-count-badge">0</span>)</h2>
+                </div>
+                <div class="level-right">
+                  <button type="button" class="button is-small is-light" id="btn-refresh-transactions" data-testid="btn-refresh-transactions">
+                    🔄 Atualizar
+                  </button>
+                </div>
+              </div>
+
+              <!-- Barra de Filtros Combinados (RN-FE-09) -->
+              <form id="form-filter-transactions" class="box has-background-light p-3 mb-4">
+                <div class="columns is-variable is-2 is-multiline is-vcentered">
+                  <div class="column is-4">
+                    <label class="label is-size-7 mb-1" for="filter-account">Filtrar por Carteira</label>
+                    <div class="select is-small is-fullwidth">
+                      <select id="filter-account" name="accountId" data-testid="filter-account">
+                        <option value="">Todas as carteiras</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="column is-3">
+                    <label class="label is-size-7 mb-1" for="filter-status">Status</label>
+                    <div class="select is-small is-fullwidth">
+                      <select id="filter-status" name="status" data-testid="filter-status">
+                        <option value="">Todos os status</option>
+                        <option value="PAID">PAID (Liquidada)</option>
+                        <option value="PENDING">PENDING (Pendente)</option>
+                        <option value="FAILED">FAILED (Falhou)</option>
+                        <option value="REFUNDED">REFUNDED (Estornada)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="column is-3">
+                    <label class="label is-size-7 mb-1" for="filter-type">Tipo</label>
+                    <div class="select is-small is-fullwidth">
+                      <select id="filter-type" name="type" data-testid="filter-type">
+                        <option value="">Todos os tipos</option>
+                        <option value="CHARGE">CHARGE (+)</option>
+                        <option value="CREDIT">CREDIT (+)</option>
+                        <option value="PAYMENT">PAYMENT (-)</option>
+                        <option value="DEBIT">DEBIT (-)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="column is-2 is-flex is-align-items-flex-end">
+                    <div class="buttons are-small mt-4">
+                      <button type="submit" class="button is-link" data-testid="btn-apply-filters">Filtrar</button>
+                      <button type="button" class="button is-white" id="btn-clear-filters" data-testid="btn-clear-filters">Limpar</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Tabela de Transações -->
+              <div id="transactions-list-container"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- VIEW 5: WEBHOOKS E SIMULADOR HMAC (/webhooks) - RN-FE-11 e RN-FE-12 -->
+      <!-- =================================================================== -->
+      <section id="view-webhooks" class="is-hidden" aria-label="Webhooks e Simulador HMAC">
+        <div class="level mb-5">
+          <div class="level-left">
+            <div>
+              <h1 class="title is-3 mb-1">Webhooks &amp; Simulador HMAC SHA-256</h1>
+              <p class="subtitle is-6 has-text-grey">
+                Cadastre endpoints de notificação, inspecione assinaturas criptográficas <code>sha256=...</code> e simule eventos
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="columns is-variable is-5">
+          <!-- Coluna Esquerda: Cadastro de Webhook (RN-FE-11) -->
+          <div class="column is-5">
+            <div class="pulsar-panel">
+              <h2 class="title is-5 mb-3">Cadastrar Endpoint de Webhook</h2>
+              <form id="form-create-webhook" novalidate>
+                <div class="field">
+                  <label class="label" for="input-webhook-url">URL de Destino (HTTP / HTTPS) *</label>
+                  <div class="control">
+                    <input
+                      id="input-webhook-url"
+                      name="url"
+                      type="url"
+                      class="input"
+                      placeholder="https://api.sualoja.com.br/webhooks/pulsar"
+                      required
+                      data-testid="input-webhook-url"
+                    />
+                  </div>
+                  <p class="help is-danger is-hidden" id="help-webhook-url" role="alert"></p>
+                  <p class="help has-text-grey">Deve iniciar obrigatoriamente com <code>http://</code> ou <code>https://</code>.</p>
+                </div>
+
+                <!-- Checkboxes de Eventos (Todos pré-selecionados por padrão - RN-FE-11) -->
+                <div class="field">
+                  <label class="label" for="evt-transaction-paid">Eventos Assinados *</label>
+                  <div class="control box has-background-light p-3">
+                    <div class="mb-2">
+                      <label class="checkbox" for="evt-transaction-paid">
+                        <input
+                          type="checkbox"
+                          id="evt-transaction-paid"
+                          name="events"
+                          value="transaction.paid"
+                          checked
+                          data-testid="checkbox-event-transaction.paid"
+                        />
+                        <span class="is-monospace ml-1">transaction.paid</span> — Transação liquidada
+                      </label>
+                    </div>
+                    <div class="mb-2">
+                      <label class="checkbox" for="evt-transaction-failed">
+                        <input
+                          type="checkbox"
+                          id="evt-transaction-failed"
+                          name="events"
+                          value="transaction.failed"
+                          checked
+                          data-testid="checkbox-event-transaction.failed"
+                        />
+                        <span class="is-monospace ml-1">transaction.failed</span> — Falha no processamento
+                      </label>
+                    </div>
+                    <div class="mb-2">
+                      <label class="checkbox" for="evt-transaction-refunded">
+                        <input
+                          type="checkbox"
+                          id="evt-transaction-refunded"
+                          name="events"
+                          value="transaction.refunded"
+                          checked
+                          data-testid="checkbox-event-transaction.refunded"
+                        />
+                        <span class="is-monospace ml-1">transaction.refunded</span> — Transação estornada
+                      </label>
+                    </div>
+                    <div>
+                      <label class="checkbox" for="evt-webhook-test">
+                        <input
+                          type="checkbox"
+                          id="evt-webhook-test"
+                          name="events"
+                          value="webhook.test"
+                          checked
+                          data-testid="checkbox-event-webhook.test"
+                        />
+                        <span class="is-monospace ml-1">webhook.test</span> — Evento de simulação/teste
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Segredo HMAC Opcional com mostrar/ocultar/copiar -->
+                <div class="field">
+                  <label class="label" for="input-webhook-secret">Segredo HMAC (Secret) <span class="has-text-grey is-size-7">(Opcional)</span></label>
+                  <div class="field has-addons mb-1">
+                    <div class="control is-expanded">
+                      <input
+                        id="input-webhook-secret"
+                        name="secret"
+                        type="password"
+                        class="input is-monospace"
+                        placeholder="Padrão: whsec_pulsar_hmac_secret_2026"
+                        data-testid="input-webhook-secret"
+                      />
+                    </div>
+                    <div class="control">
+                      <button
+                        type="button"
+                        id="btn-toggle-secret"
+                        class="button is-light"
+                        title="Mostrar ou ocultar segredo"
+                        data-testid="btn-toggle-secret"
+                      >
+                        👁️ Mostrar
+                      </button>
+                    </div>
+                    <div class="control">
+                      <button
+                        type="button"
+                        id="btn-copy-secret"
+                        class="button is-light"
+                        title="Copiar segredo HMAC"
+                        data-testid="btn-copy-secret"
+                      >
+                        📋 Copiar
+                      </button>
+                    </div>
+                  </div>
+                  <p class="help has-text-grey">
+                    Se omitido, o backend utiliza o segredo padrão da plataforma para assinar o header <code>X-Signature</code>.
+                  </p>
+                </div>
+
+                <div class="field mt-4">
+                  <div class="control">
+                    <button
+                      type="submit"
+                      id="btn-save-webhook"
+                      class="button is-primary is-fullwidth has-text-weight-bold"
+                      data-testid="btn-save-webhook"
+                    >
+                      Salvar Webhook
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Coluna Direita: Simulador de Disparo HMAC (RN-FE-12) -->
+          <div class="column is-7">
+            <div class="pulsar-panel">
+              <h2 class="title is-5 mb-2">Simulador de Disparo de Webhook (Inspeção HMAC)</h2>
+              <p class="is-size-7 has-text-grey mb-4">
+                Envia uma requisição para <code>POST /webhooks/test</code> e exibe a assinatura criptográfica <code>X-Signature: sha256=&lt;64_hex&gt;</code> gerada pelo motor do Pulsar Payments.
+              </p>
+
+              <form id="form-simulate-webhook" novalidate>
+                <div class="columns is-variable is-3">
+                  <div class="column is-6">
+                    <div class="field">
+                      <label class="label" for="select-simulate-webhook-id">Webhook Cadastrado <span class="has-text-grey is-size-7">(Opcional)</span></label>
+                      <div class="control">
+                        <div class="select is-fullwidth">
+                          <select id="select-simulate-webhook-id" name="webhookId" data-testid="select-simulate-webhook-id">
+                            <option value="">Automático (Webhook ativo mais recente)</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="column is-6">
+                    <div class="field">
+                      <label class="label" for="select-simulate-event">Tipo de Evento *</label>
+                      <div class="control">
+                        <div class="select is-fullwidth">
+                          <select id="select-simulate-event" name="event" data-testid="select-simulate-event">
+                            <option value="webhook.test" selected>webhook.test (Padrão)</option>
+                            <option value="transaction.paid">transaction.paid</option>
+                            <option value="transaction.failed">transaction.failed</option>
+                            <option value="transaction.refunded">transaction.refunded</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label class="label" for="textarea-simulate-data">Objeto JSON Customizado (<code>data</code>)</label>
+                  <div class="control">
+                    <textarea
+                      id="textarea-simulate-data"
+                      name="data"
+                      rows="4"
+                      class="textarea is-monospace is-size-7"
+                      data-testid="textarea-simulate-data"
+                    >{
+  "orderId": "9841",
+  "status": "PAID",
+  "amount": 250.00,
+  "paymentMethod": "PIX"
+}</textarea>
+                  </div>
+                  <p class="help is-danger is-hidden" id="help-simulate-json" role="alert"></p>
+                </div>
+
+                <div class="field">
+                  <div class="control">
+                    <button
+                      type="submit"
+                      id="btn-simulate-webhook"
+                      class="button is-link has-text-weight-bold"
+                      data-testid="btn-simulate-webhook"
+                    >
+                      ⚡ Disparar Simulação HMAC
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Resultado da Inspeção HMAC (RN-FE-12) -->
+              <div id="simulation-result-panel" class="mt-5 pt-4 is-hidden" style="border-top: 1px solid #e2e8f0;" data-testid="simulation-result-panel">
+                <div class="level is-mobile mb-3">
+                  <div class="level-left">
+                    <h3 class="title is-6 mb-0 has-text-link">🔐 Resultado de Segurança (Inspeção HMAC SHA-256)</h3>
+                  </div>
+                  <div class="level-right">
+                    <span class="tag is-success is-light has-text-weight-bold" id="sim-result-status">200 OK — SIMULATED</span>
+                  </div>
+                </div>
+
+                <div class="field mb-3">
+                  <label class="label is-size-7 mb-1" for="sim-target-url">URL de Destino (<code>targetUrl</code>)</label>
+                  <input
+                    id="sim-target-url"
+                    type="text"
+                    class="input is-small is-monospace"
+                    readonly
+                    data-testid="sim-target-url"
+                  />
+                </div>
+
+                <div class="field mb-3">
+                  <div class="is-flex is-justify-content-space-between is-align-items-center mb-1">
+                    <span class="label is-size-7 mb-0">Header <code>X-Signature</code> (HMAC SHA-256)</span>
+                    <button
+                      type="button"
+                      id="btn-copy-simulated-hmac"
+                      class="button is-small is-ghost p-0"
+                      data-testid="btn-copy-simulated-hmac"
+                    >
+                      📋 Copiar Assinatura
+                    </button>
+                  </div>
+                  <div class="hmac-code-block" id="code-hmac-signature" data-testid="code-hmac-signature">
+                    sha256=...
+                  </div>
+                </div>
+
+                <div class="columns is-variable is-3">
+                  <div class="column is-5">
+                    <p class="label is-size-7 mb-1">Headers Enviados (<code>headers</code>)</p>
+                    <pre class="json-pre" id="sim-headers-pre" data-testid="sim-headers-pre"></pre>
+                  </div>
+                  <div class="column is-7">
+                    <p class="label is-size-7 mb-1">Payload JSON Assinado (<code>payload</code>)</p>
+                    <pre class="json-pre" id="sim-payload-pre" data-testid="sim-payload-pre"></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Listagem de Webhooks e Histórico de Entregas (deliveryLogs) (RN-FE-11) -->
+        <div class="pulsar-panel mt-2">
+          <div class="level is-mobile mb-4">
+            <div class="level-left">
+              <h2 class="title is-5 mb-0">Webhooks Configurados &amp; Histórico de Entregas (<span id="webhooks-count-badge">0</span>)</h2>
+            </div>
+            <div class="level-right">
+              <button type="button" class="button is-small is-light" id="btn-refresh-webhooks" data-testid="btn-refresh-webhooks">
+                🔄 Atualizar Webhooks
+              </button>
+            </div>
+          </div>
+
+          <div id="webhooks-list-container"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- =================================================================== -->
+  <!-- MODAL DE CONFIRMAÇÃO DE ESTORNO (RN-FE-10)                          -->
+  <!-- =================================================================== -->
+  <div class="modal" id="modal-refund" data-testid="modal-refund">
+    <div class="modal-background" id="modal-refund-bg"></div>
+    <div class="modal-card">
+      <header class="modal-card-head has-background-link-dark">
+        <p class="modal-card-title has-text-white is-size-5">Confirmar Solicitação de Estorno (REFUND)</p>
+        <button type="button" class="delete" aria-label="close" id="btn-close-refund-modal"></button>
+      </header>
+      <form id="form-refund-transaction" novalidate>
+        <section class="modal-card-body">
+          <input type="hidden" id="refund-transaction-id" name="transactionId" />
+
+          <div class="notification is-warning is-light mb-4" id="refund-impact-box" data-testid="refund-impact-box">
+            <p class="has-text-weight-bold mb-1" id="refund-impact-title">Impacto Financeiro do Estorno</p>
+            <p id="refund-impact-description" class="is-size-6"></p>
+          </div>
+
+          <div class="columns is-mobile mb-3">
+            <div class="column">
+              <p class="is-size-7 has-text-grey">ID da Transação</p>
+              <p class="is-monospace is-size-7 has-text-weight-semibold" id="refund-tx-id-display"></p>
+            </div>
+            <div class="column">
+              <p class="is-size-7 has-text-grey">Tipo Original</p>
+              <p class="has-text-weight-bold" id="refund-tx-type-display"></p>
+            </div>
+            <div class="column">
+              <p class="is-size-7 has-text-grey">Valor a Estornar</p>
+              <p class="has-text-weight-bold is-size-5" id="refund-tx-amount-display"></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="input-refund-reason">Motivo do Estorno (<code>reason</code>) <span class="has-text-grey is-size-7">(Opcional)</span></label>
+            <div class="control">
+              <input
+                id="input-refund-reason"
+                name="reason"
+                type="text"
+                class="input"
+                placeholder="Ex.: Cancelamento solicitado pelo cliente dentro do prazo de 7 dias"
+                data-testid="input-refund-reason"
+              />
+            </div>
+          </div>
+        </section>
+        <footer class="modal-card-foot is-justify-content-flex-end">
+          <button type="button" class="button" id="btn-cancel-refund" data-testid="btn-cancel-refund">Cancelar</button>
+          <button type="submit" class="button is-danger has-text-weight-bold" id="btn-confirm-refund" data-testid="btn-confirm-refund">
+            Confirmar Estorno
+          </button>
+        </footer>
+      </form>
+    </div>
+  </div>
+
+  <!-- Script Principal da Aplicação Frontend -->
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>
