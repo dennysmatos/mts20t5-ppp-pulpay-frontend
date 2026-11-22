@@ -1,0 +1,550 @@
+:root,
+html[data-theme="light"] {
+  --pulsar-primary: #4f46e5;
+  --pulsar-primary-dark: #3730a3;
+  --pulsar-accent: #38bdf8;
+  --pulsar-bg: #f4f6fb;
+  --pulsar-surface: #ffffff;
+  --pulsar-surface-alt: #f8fafc;
+  --pulsar-border: #e2e8f0;
+  --pulsar-border-hover: #818cf8;
+  --pulsar-text: #1e293b;
+  --pulsar-muted: #64748b;
+  --pulsar-success: #10b981;
+  --pulsar-warning: #f59e0b;
+  --pulsar-danger: #ef4444;
+  --pulsar-purple: #7c3aed;
+  --pulsar-orange: #ea580c;
+  --pulsar-shadow-sm: 0 2px 10px rgba(15, 23, 42, 0.04);
+  --pulsar-shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.06);
+  --pulsar-shadow-glow: 0 12px 28px -6px rgba(79, 70, 229, 0.22);
+  --pulsar-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ========================================================================= */
+/* DARK THEME (Bulma v1 data-theme="dark" + Custom Design Tokens)            */
+/* ========================================================================= */
+html[data-theme="dark"] {
+  --pulsar-primary: #6366f1;
+  --pulsar-primary-dark: #4f46e5;
+  --pulsar-accent: #38bdf8;
+  --pulsar-bg: #0b0f19;
+  --pulsar-surface: #111827;
+  --pulsar-surface-alt: #1e293b;
+  --pulsar-border: #1f2937;
+  --pulsar-border-hover: #6366f1;
+  --pulsar-text: #f1f5f9;
+  --pulsar-muted: #94a3b8;
+  --pulsar-orange: #fb923c;
+  --pulsar-shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.35);
+  --pulsar-shadow-md: 0 14px 30px -5px rgba(0, 0, 0, 0.55);
+  --pulsar-shadow-glow: 0 12px 30px -6px rgba(99, 102, 241, 0.35);
+}
+
+html, body {
+  background-color: var(--pulsar-bg);
+  color: var(--pulsar-text);
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  transition: background-color 0.25s var(--pulsar-ease), color 0.25s var(--pulsar-ease);
+}
+
+/* ========================================================================= */
+/* NAVBAR FIXA NO TOPO COM EFEITO GLASSMORPHISM & HOVER                      */
+/* ========================================================================= */
+.navbar.is-pulsar.is-fixed-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  background: linear-gradient(135deg, rgba(30, 27, 75, 0.94) 0%, rgba(49, 46, 129, 0.94) 50%, rgba(67, 56, 202, 0.94) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.22);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background 0.25s var(--pulsar-ease), box-shadow 0.25s var(--pulsar-ease);
+}
+
+html[data-theme="dark"] .navbar.is-pulsar.is-fixed-top {
+  background: linear-gradient(135deg, rgba(9, 13, 24, 0.95) 0%, rgba(17, 24, 39, 0.95) 55%, rgba(30, 27, 75, 0.95) 100%);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.25);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.55);
+}
+
+.navbar.is-pulsar .navbar-brand .navbar-item,
+.navbar.is-pulsar .navbar-menu .navbar-item {
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 500;
+  position: relative;
+  transition: color 0.2s var(--pulsar-ease), background-color 0.2s var(--pulsar-ease), transform 0.2s var(--pulsar-ease);
+}
+
+.navbar.is-pulsar .navbar-menu .navbar-start .navbar-item {
+  margin: 0.35rem 0.2rem;
+  border-radius: 8px;
+}
+
+.navbar.is-pulsar .navbar-menu .navbar-start .navbar-item::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #38bdf8, #a5b4fc);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  transition: width 0.25s var(--pulsar-ease);
+}
+
+.navbar.is-pulsar .navbar-menu .navbar-start .navbar-item:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.navbar.is-pulsar .navbar-menu .navbar-start .navbar-item:hover::after,
+.navbar.is-pulsar .navbar-menu .navbar-start .navbar-item.is-active::after {
+  width: 65%;
+}
+
+.navbar.is-pulsar .navbar-menu .navbar-start .navbar-item.is-active {
+  background-color: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.pulsar-logo-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: linear-gradient(135deg, #38bdf8, #818cf8);
+  color: #0f172a;
+  font-weight: 800;
+  border-radius: 8px;
+  margin-right: 10px;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 8px rgba(56, 189, 248, 0.4);
+  transition: transform 0.25s var(--pulsar-ease), box-shadow 0.25s var(--pulsar-ease);
+}
+
+.navbar-brand .navbar-item:hover .pulsar-logo-badge {
+  transform: rotate(-6deg) scale(1.08);
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.65);
+}
+
+/* Botão de Alternância de Tema (Light/Dark) */
+.button.is-theme-toggle {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  font-weight: 600;
+  padding-left: 0.85rem;
+  padding-right: 0.85rem;
+  transition: all 0.22s var(--pulsar-ease);
+}
+
+.button.is-theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  border-color: #38bdf8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+}
+
+/* ========================================================================= */
+/* AUTH CARD                                                                 */
+/* ========================================================================= */
+.auth-wrapper {
+  min-height: calc(100vh - 140px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 480px;
+  border-radius: 14px;
+  box-shadow: var(--pulsar-shadow-md);
+  border: 1px solid var(--pulsar-border);
+  background: var(--pulsar-surface);
+  overflow: hidden;
+  transition: transform 0.28s var(--pulsar-ease), box-shadow 0.28s var(--pulsar-ease), border-color 0.28s var(--pulsar-ease);
+}
+
+.auth-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--pulsar-shadow-glow);
+  border-color: var(--pulsar-border-hover);
+}
+
+.auth-card-header {
+  background: linear-gradient(135deg, #1e1b4b 0%, #3730a3 100%);
+  color: #ffffff;
+  padding: 1.75rem 2rem;
+  text-align: center;
+}
+
+.auth-card-body {
+  padding: 2rem;
+}
+
+/* ========================================================================= */
+/* CARDS, PAINÉIS E KPI BOXES COM HOVER ELEVATION (MELHORES PRÁTICAS)        */
+/* ========================================================================= */
+.pulsar-card {
+  background: var(--pulsar-surface);
+  border-radius: 12px;
+  border: 1px solid var(--pulsar-border);
+  box-shadow: var(--pulsar-shadow-sm);
+  transition: transform 0.25s var(--pulsar-ease), box-shadow 0.25s var(--pulsar-ease), border-color 0.25s var(--pulsar-ease);
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.pulsar-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--pulsar-primary), var(--pulsar-accent));
+  opacity: 0;
+  transition: opacity 0.25s var(--pulsar-ease);
+}
+
+.pulsar-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--pulsar-shadow-glow);
+  border-color: var(--pulsar-border-hover);
+}
+
+.pulsar-card:hover::before {
+  opacity: 1;
+}
+
+.pulsar-panel {
+  background: var(--pulsar-surface);
+  border-radius: 12px;
+  border: 1px solid var(--pulsar-border);
+  box-shadow: var(--pulsar-shadow-sm);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: box-shadow 0.25s var(--pulsar-ease), border-color 0.25s var(--pulsar-ease), background-color 0.25s var(--pulsar-ease);
+}
+
+.pulsar-panel:hover {
+  box-shadow: var(--pulsar-shadow-md);
+  border-color: rgba(99, 102, 241, 0.35);
+}
+
+/* KPI Boxes */
+.kpi-box {
+  background: var(--pulsar-surface);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--pulsar-border);
+  box-shadow: var(--pulsar-shadow-sm);
+  transition: transform 0.25s var(--pulsar-ease), box-shadow 0.25s var(--pulsar-ease), border-color 0.25s var(--pulsar-ease);
+}
+
+.kpi-box:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--pulsar-shadow-glow);
+  border-color: var(--pulsar-border-hover);
+}
+
+.kpi-box .kpi-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pulsar-muted);
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+.kpi-box .kpi-value {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--pulsar-text);
+}
+
+/* ========================================================================= */
+/* MICRO-INTERAÇÕES DE HOVER EM BOTÕES, INPUTS, TABELAS E BOXES              */
+/* ========================================================================= */
+.button {
+  transition: transform 0.18s var(--pulsar-ease), box-shadow 0.18s var(--pulsar-ease), background-color 0.18s var(--pulsar-ease), border-color 0.18s var(--pulsar-ease);
+}
+
+.button:not(:disabled):not(.is-ghost):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.14);
+}
+
+.button:not(:disabled):active {
+  transform: translateY(0);
+}
+
+.input,
+.textarea,
+.select select {
+  transition: border-color 0.2s var(--pulsar-ease), box-shadow 0.2s var(--pulsar-ease), background-color 0.2s var(--pulsar-ease);
+}
+
+.input:hover,
+.textarea:hover,
+.select select:hover {
+  border-color: var(--pulsar-border-hover);
+}
+
+.input:focus,
+.textarea:focus,
+.select select:focus {
+  border-color: var(--pulsar-primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+/* Tabelas interativas no hover */
+.table.is-hoverable tbody tr {
+  transition: background-color 0.18s var(--pulsar-ease), transform 0.18s var(--pulsar-ease);
+}
+
+.table.is-hoverable tbody tr:hover {
+  background-color: rgba(79, 70, 229, 0.06) !important;
+}
+
+html[data-theme="dark"] .table.is-hoverable tbody tr:hover {
+  background-color: rgba(99, 102, 241, 0.14) !important;
+}
+
+/* Boxes internos e adaptações Dark Mode */
+.box {
+  background-color: var(--pulsar-surface);
+  border: 1px solid var(--pulsar-border);
+  transition: transform 0.2s var(--pulsar-ease), border-color 0.2s var(--pulsar-ease), box-shadow 0.2s var(--pulsar-ease);
+}
+
+.box:hover {
+  border-color: rgba(99, 102, 241, 0.45);
+}
+
+html[data-theme="dark"] .box.has-background-light {
+  background-color: var(--pulsar-surface-alt) !important;
+  color: var(--pulsar-text) !important;
+}
+
+html[data-theme="dark"] .title,
+html[data-theme="dark"] .label,
+html[data-theme="dark"] strong {
+  color: var(--pulsar-text);
+}
+
+html[data-theme="dark"] .subtitle,
+html[data-theme="dark"] .has-text-grey {
+  color: var(--pulsar-muted) !important;
+}
+
+html[data-theme="dark"] .has-text-success-dark {
+  color: #34d399 !important;
+}
+
+/* ========================================================================= */
+/* SEMÂNTICA VISUAL DE VALORES E ESTADOS (RN-FE-09)                          */
+/* ========================================================================= */
+.amount-credit-paid {
+  color: #059669 !important;
+  font-weight: 700;
+}
+
+html[data-theme="dark"] .amount-credit-paid {
+  color: #34d399 !important;
+}
+
+.amount-debit-paid {
+  color: var(--pulsar-orange) !important;
+  font-weight: 700;
+}
+
+.amount-neutral {
+  color: var(--pulsar-muted);
+  font-weight: 600;
+}
+
+/* Badges de Status de Transação com micro-hover */
+.tag {
+  transition: transform 0.18s var(--pulsar-ease), box-shadow 0.18s var(--pulsar-ease);
+}
+
+.tag:hover {
+  transform: scale(1.03);
+}
+
+.tag.is-status-paid {
+  background-color: #d1fae5;
+  color: #065f46;
+  font-weight: 700;
+  border: 1px solid #6ee7b7;
+}
+
+html[data-theme="dark"] .tag.is-status-paid {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #6ee7b7;
+  border-color: rgba(16, 185, 129, 0.45);
+}
+
+.tag.is-status-pending {
+  background-color: #fef3c7;
+  color: #92400e;
+  font-weight: 700;
+  border: 1px solid #fcd34d;
+}
+
+html[data-theme="dark"] .tag.is-status-pending {
+  background-color: rgba(245, 158, 11, 0.2);
+  color: #fcd34d;
+  border-color: rgba(245, 158, 11, 0.45);
+}
+
+.tag.is-status-failed {
+  background-color: #fee2e2;
+  color: #991b1b;
+  font-weight: 700;
+  border: 1px solid #fca5a5;
+}
+
+html[data-theme="dark"] .tag.is-status-failed {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.45);
+}
+
+.tag.is-status-refunded {
+  background-color: #ede9fe;
+  color: #5b21b6;
+  font-weight: 700;
+  border: 1px solid #c4b5fd;
+}
+
+html[data-theme="dark"] .tag.is-status-refunded {
+  background-color: rgba(124, 58, 237, 0.22);
+  color: #c4b5fd;
+  border-color: rgba(124, 58, 237, 0.5);
+}
+
+/* Badges de Status de Conta (RN-FE-06) */
+.tag.is-account-active {
+  background-color: #d1fae5;
+  color: #065f46;
+  font-weight: 700;
+  border: 1px solid #6ee7b7;
+}
+
+html[data-theme="dark"] .tag.is-account-active {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #6ee7b7;
+  border-color: rgba(16, 185, 129, 0.45);
+}
+
+.tag.is-account-blocked {
+  background-color: #fee2e2;
+  color: #991b1b;
+  font-weight: 700;
+  border: 1px solid #fca5a5;
+}
+
+html[data-theme="dark"] .tag.is-account-blocked {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.45);
+}
+
+/* Código e Assinaturas HMAC */
+.hmac-code-block {
+  font-family: 'Fira Code', 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  background-color: #0f172a;
+  color: #38bdf8;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  word-break: break-all;
+  border: 1px solid #1e293b;
+  transition: border-color 0.2s var(--pulsar-ease), box-shadow 0.2s var(--pulsar-ease);
+}
+
+.hmac-code-block:hover {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.18);
+}
+
+.json-pre {
+  background-color: #0f172a;
+  color: #e2e8f0;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  max-height: 280px;
+  overflow-y: auto;
+  border: 1px solid #1e293b;
+  transition: border-color 0.2s var(--pulsar-ease);
+}
+
+.json-pre:hover {
+  border-color: #475569;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: var(--pulsar-surface-alt);
+  border: 2px dashed var(--pulsar-border);
+  border-radius: 12px;
+  color: var(--pulsar-muted);
+  transition: border-color 0.22s var(--pulsar-ease), background-color 0.22s var(--pulsar-ease);
+}
+
+.empty-state:hover {
+  border-color: var(--pulsar-border-hover);
+}
+
+/* Utilitários */
+.is-hidden {
+  display: none !important;
+}
+
+.is-monospace {
+  font-family: 'Fira Code', 'JetBrains Mono', monospace;
+  font-size: 0.85em;
+}
+
+.field-error-highlight {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 0.125em rgba(239, 68, 68, 0.25) !important;
+}
+
+.table td, .table th {
+  vertical-align: middle !important;
+}
+
+/* Notificações flutuantes / Banner */
+.global-alerts-container {
+  margin-bottom: 1.25rem;
+}
+
+/* Acessibilidade: Respeita usuários com preferência por movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
