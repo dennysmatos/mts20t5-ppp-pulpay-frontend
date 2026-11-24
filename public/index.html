@@ -60,23 +60,22 @@
         </div>
 
         <div class="navbar-end">
-          <!-- Botão de Alternância de Tema (Light / Dark Mode) -->
+          <!-- Botão Minimalista de Alternância de Tema (Apenas Símbolo: ☀️ / 🌙) -->
           <div class="navbar-item">
             <button type="button" id="btn-theme-toggle" class="button is-small is-theme-toggle"
               aria-label="Alternar tema claro ou escuro" title="Alternar tema (Claro / Escuro)"
               data-testid="btn-theme-toggle">
-              <span id="theme-toggle-icon" aria-hidden="true">🌙</span>
-              <span id="theme-toggle-label" class="ml-1">Modo Escuro</span>
+              <span id="theme-toggle-icon" aria-hidden="true">☀️</span>
             </button>
           </div>
 
           <!-- Informações do Lojista Autenticado -->
           <div class="navbar-item" id="nav-merchant-info">
-            <div class="buttons">
-              <span class="tag is-dark is-medium mr-2" data-testid="merchant-header-info" id="merchant-display-name">
+            <div class="is-flex is-align-items-center" style="gap: 0.6rem;">
+              <span class="tag is-merchant-badge" data-testid="merchant-header-info" id="merchant-display-name">
                 Lojista
               </span>
-              <button type="button" class="button is-small is-danger is-light" id="btn-logout" data-testid="btn-logout">
+              <button type="button" class="button is-small is-pulsar-logout" id="btn-logout" data-testid="btn-logout">
                 Sair da Conta
               </button>
             </div>
@@ -84,8 +83,8 @@
 
           <!-- Links Públicos (exibidos apenas quando não autenticado) -->
           <div class="navbar-item is-hidden" id="nav-guest-links">
-            <div class="buttons">
-              <a class="button is-small is-light" href="/login" data-nav="/login" data-testid="nav-login">
+            <div class="is-flex is-align-items-center" style="gap: 0.5rem;">
+              <a class="button is-small is-pulsar-secondary" href="/login" data-nav="/login" data-testid="nav-login">
                 Entrar
               </a>
               <a class="button is-small is-primary" href="/register" data-nav="/register" data-testid="nav-register">

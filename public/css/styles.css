@@ -239,24 +239,91 @@ html[data-theme="dark"] body {
   font-weight: 600;
 }
 
-/* Botão de Alternância de Tema (Light/Dark) */
+/* Botão Minimalista de Alternância de Tema (Apenas Símbolo Circular) */
 .button.is-theme-toggle {
-  background: rgba(15, 27, 49, 0.85);
-  color: #f8fafc;
-  border: 1px solid rgba(16, 245, 122, 0.4);
-  border-radius: 999px;
-  font-weight: 600;
-  padding-left: 0.9rem;
-  padding-right: 0.9rem;
+  width: 36px;
+  height: 36px;
+  padding: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 27, 49, 0.85) !important;
+  color: #f8fafc !important;
+  border: 1px solid rgba(16, 245, 122, 0.4) !important;
+  border-radius: 50% !important;
+  font-size: 1rem;
+  line-height: 1;
   transition: all 0.22s var(--pulsar-ease);
 }
 
 .button.is-theme-toggle:hover {
-  background: rgba(16, 245, 122, 0.16);
-  color: #10f57a;
-  border-color: #10f57a;
-  transform: translateY(-2px);
-  box-shadow: 0 0 16px rgba(16, 245, 122, 0.32);
+  background: rgba(16, 245, 122, 0.16) !important;
+  color: #10f57a !important;
+  border-color: #10f57a !important;
+  transform: translateY(-2px) rotate(12deg);
+  box-shadow: 0 0 16px rgba(16, 245, 122, 0.35);
+}
+
+/* Alinhamento da Navbar End e Badge do Lojista */
+.navbar.is-pulsar > .container {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.navbar.is-pulsar .navbar-end {
+  align-items: center;
+}
+
+.navbar.is-pulsar .navbar-end .navbar-item {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.tag.is-merchant-badge {
+  background-color: rgba(15, 27, 49, 0.9) !important;
+  color: #e2e8f0 !important;
+  border: 1px solid rgba(14, 165, 233, 0.32);
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.78rem;
+  height: 2.15rem;
+  padding: 0 0.75rem;
+  max-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Botão Sair da Conta harmônico com o Tema Escuro/Azul Noturno da Navbar */
+.button.is-pulsar-logout {
+  background: rgba(244, 63, 94, 0.14) !important;
+  color: #fda4af !important;
+  border: 1px solid rgba(244, 63, 94, 0.45) !important;
+  font-weight: 600;
+  border-radius: 8px;
+  height: 2.15rem;
+  padding: 0 0.85rem;
+}
+
+.button.is-pulsar-logout:hover {
+  background: rgba(244, 63, 94, 0.26) !important;
+  color: #ffffff !important;
+  border-color: #fb7185 !important;
+  box-shadow: 0 0 14px rgba(244, 63, 94, 0.35) !important;
+}
+
+.button.is-pulsar-secondary {
+  background: rgba(14, 165, 233, 0.14) !important;
+  color: #e0f2fe !important;
+  border: 1px solid rgba(14, 165, 233, 0.4) !important;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.button.is-pulsar-secondary:hover {
+  background: rgba(14, 165, 233, 0.25) !important;
+  color: #ffffff !important;
+  border-color: #38bdf8 !important;
 }
 
 /* ========================================================================= */
@@ -481,6 +548,66 @@ html[data-theme="dark"] body {
 
 .button.is-link:hover {
   box-shadow: 0 6px 20px rgba(139, 92, 246, 0.42) !important;
+}
+
+/* Harmonização de botões secundários (is-light, is-white) no Modo Escuro */
+html[data-theme="dark"] .button.is-light:not(.is-danger):not(.is-warning):not(.is-link):not(.is-info):not(.is-success),
+html[data-theme="dark"] .button.is-white {
+  background-color: rgba(22, 36, 64, 0.9) !important;
+  color: #e2e8f0 !important;
+  border: 1px solid rgba(14, 165, 233, 0.35) !important;
+  font-weight: 600;
+}
+
+html[data-theme="dark"] .button.is-light:not(.is-danger):not(.is-warning):not(.is-link):not(.is-info):not(.is-success):hover,
+html[data-theme="dark"] .button.is-white:hover {
+  background-color: rgba(14, 165, 233, 0.2) !important;
+  color: #10f57a !important;
+  border-color: #10f57a !important;
+  box-shadow: 0 4px 16px rgba(16, 245, 122, 0.22) !important;
+}
+
+html[data-theme="dark"] .button.is-link.is-light {
+  background-color: rgba(14, 165, 233, 0.14) !important;
+  color: #38bdf8 !important;
+  border: 1px solid rgba(14, 165, 233, 0.35) !important;
+  font-weight: 600;
+}
+
+html[data-theme="dark"] .button.is-link.is-light:hover {
+  background-color: rgba(14, 165, 233, 0.26) !important;
+  color: #ffffff !important;
+  border-color: #38bdf8 !important;
+}
+
+html[data-theme="dark"] .button.is-warning.is-light {
+  background-color: rgba(245, 158, 11, 0.15) !important;
+  color: #fcd34d !important;
+  border: 1px solid rgba(245, 158, 11, 0.4) !important;
+}
+
+html[data-theme="dark"] .button.is-warning.is-light:hover {
+  background-color: rgba(245, 158, 11, 0.28) !important;
+  color: #ffffff !important;
+  border-color: #fbbf24 !important;
+}
+
+html[data-theme="dark"] .button.is-danger.is-light {
+  background-color: rgba(244, 63, 94, 0.14) !important;
+  color: #fda4af !important;
+  border: 1px solid rgba(244, 63, 94, 0.45) !important;
+}
+
+html[data-theme="dark"] .button.is-danger.is-light:hover {
+  background-color: rgba(244, 63, 94, 0.26) !important;
+  color: #ffffff !important;
+  border-color: #fb7185 !important;
+}
+
+html[data-theme="dark"] .button[disabled] {
+  background-color: rgba(15, 27, 49, 0.5) !important;
+  color: #64748b !important;
+  border-color: rgba(148, 163, 184, 0.15) !important;
 }
 
 .button:not(:disabled):not(.is-ghost):hover {

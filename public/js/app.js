@@ -50,14 +50,16 @@ function applyTheme(theme) {
   localStorage.setItem(THEME_STORAGE_KEY, normalized);
 
   const iconEl = document.getElementById('theme-toggle-icon');
-  const labelEl = document.getElementById('theme-toggle-label');
-  if (iconEl && labelEl) {
+  const btnEl = document.getElementById('btn-theme-toggle');
+  if (iconEl) {
     if (normalized === 'dark') {
       iconEl.textContent = '☀️';
-      labelEl.textContent = 'Modo Claro';
+      btnEl?.setAttribute('title', 'Alternar para Modo Claro');
+      btnEl?.setAttribute('aria-label', 'Alternar para Modo Claro');
     } else {
       iconEl.textContent = '🌙';
-      labelEl.textContent = 'Modo Escuro';
+      btnEl?.setAttribute('title', 'Alternar para Modo Escuro');
+      btnEl?.setAttribute('aria-label', 'Alternar para Modo Escuro');
     }
   }
 }
