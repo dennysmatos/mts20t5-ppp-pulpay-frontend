@@ -1679,12 +1679,33 @@ function bindGlobalEvents() {
     navigateTo(window.location.pathname, { replace: true });
   });
 
-  // Menu mobile Bulma
+  // Menu mobile Bulma com Floating Glass Drawer + Backdrop
   const burgerBtn = $('navbar-burger-btn');
   const navbarMenu = $('pulsarNavbar');
+  const mobileBackdrop = $('mobile-nav-backdrop');
+
+  const closeMobileMenu = () => {
+    burgerBtn?.classList.remove('is-active');
+    burgerBtn?.setAttribute('aria-expanded', 'false');
+    navbarMenu?.classList.remove('is-active');
+    mobileBackdrop?.classList.remove('is-active');
+  };
+
   burgerBtn?.addEventListener('click', () => {
-    burgerBtn.classList.toggle('is-active');
-    navbarMenu?.classList.toggle('is-active');
+    const willOpen = !navbarMenu?.classList.contains('is-active');
+    burgerBtn.classList.toggle('is-active', willOpen);
+    burgerBtn.setAttribute('aria-expanded', String(willOpen));
+    navbarMenu?.classList.toggle('is-active', willOpen);
+    mobileBackdrop?.classList.toggle('is-active', willOpen);
+  });
+
+  mobileBackdrop?.addEventListener('click', closeMobileMenu);
+
+  // Fecha o drawer mobile automaticamente ao clicar em qualquer rota [data-nav] ou no botão Sair
+  document.body.addEventListener('click', (event) => {
+    if (event.target.closest('[data-nav]') || event.target.closest('#btn-logout')) {
+      closeMobileMenu();
+    }
   });
 
   // Alternância de Tema (Light / Dark Mode)

@@ -117,16 +117,181 @@ html[data-theme="dark"] body {
   border-radius: 10px;
 }
 
-/* Garante que o menu mobile/desktop na navbar escura nunca fique com fundo branco no Light Theme */
+/* Garante que o menu desktop na navbar escura nunca fique com fundo branco no Light Theme */
 .navbar.is-pulsar .navbar-menu {
   background-color: transparent !important;
   box-shadow: none !important;
 }
 
+/* Backdrop escurecido com blur para o menu mobile */
+.mobile-nav-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 35;
+  background: rgba(3, 7, 18, 0.58);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s var(--pulsar-ease), visibility 0.3s var(--pulsar-ease);
+}
+
 @media screen and (max-width: 1023px) {
+  .mobile-nav-backdrop.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  /* Botão Hamburguer estilizado no padrão Fintech PulPay */
+  .navbar.is-pulsar .navbar-burger {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 0.35rem;
+    border-radius: 10px;
+    border: 1px solid rgba(14, 165, 233, 0.28);
+    background-color: rgba(15, 27, 49, 0.75) !important;
+    transition: all 0.25s var(--pulsar-ease);
+  }
+
+  .navbar.is-pulsar .navbar-burger:hover,
+  .navbar.is-pulsar .navbar-burger.is-active {
+    border-color: #10f57a;
+    background-color: rgba(16, 245, 122, 0.14) !important;
+    box-shadow: 0 0 14px rgba(16, 245, 122, 0.28);
+  }
+
+  .navbar.is-pulsar .navbar-burger span {
+    background-color: #f8fafc !important;
+    height: 2px;
+    border-radius: 2px;
+    transition: transform 0.28s var(--pulsar-ease), opacity 0.2s var(--pulsar-ease), background-color 0.2s var(--pulsar-ease);
+  }
+
+  .navbar.is-pulsar .navbar-burger.is-active span {
+    background-color: #10f57a !important;
+  }
+
+  /* Floating Glass Drawer Mobile (com animação suave sem display:none abrupto) */
+  .navbar.is-pulsar .navbar-menu {
+    display: block !important;
+    position: fixed;
+    top: 4.1rem;
+    left: 0.85rem;
+    right: 0.85rem;
+    z-index: 45;
+    padding: 0.85rem 1rem !important;
+    border-radius: 16px;
+    background: linear-gradient(155deg, rgba(8, 17, 35, 0.96) 0%, rgba(14, 27, 52, 0.97) 100%) !important;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(16, 245, 122, 0.38);
+    box-shadow:
+      0 22px 48px -8px rgba(2, 6, 23, 0.82),
+      0 0 24px -4px rgba(14, 165, 233, 0.25) !important;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-14px) scale(0.97);
+    transform-origin: top right;
+    transition:
+      opacity 0.28s var(--pulsar-ease),
+      transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0.28s var(--pulsar-ease);
+  }
+
   .navbar.is-pulsar .navbar-menu.is-active {
-    background: linear-gradient(135deg, rgba(7, 16, 36, 0.98) 0%, rgba(13, 25, 48, 0.98) 100%) !important;
-    border-bottom: 1px solid rgba(16, 245, 122, 0.25);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Lista de links de navegação mobile com indicador lateral em vez da linha inferior gigante */
+  .navbar.is-pulsar .navbar-menu .navbar-start {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+  }
+
+  .navbar.is-pulsar .navbar-menu .navbar-start .navbar-item {
+    margin: 0 !important;
+    padding: 0.7rem 0.95rem 0.7rem 1.25rem !important;
+    border-radius: 11px;
+    font-size: 0.94rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition:
+      opacity 0.25s var(--pulsar-ease),
+      transform 0.28s var(--pulsar-ease),
+      background-color 0.2s var(--pulsar-ease),
+      color 0.2s var(--pulsar-ease);
+  }
+
+  .navbar.is-pulsar .navbar-menu.is-active .navbar-start .navbar-item {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .navbar.is-pulsar .navbar-menu.is-active .navbar-start .navbar-item:nth-child(1) { transition-delay: 0.04s; }
+  .navbar.is-pulsar .navbar-menu.is-active .navbar-start .navbar-item:nth-child(2) { transition-delay: 0.08s; }
+  .navbar.is-pulsar .navbar-menu.is-active .navbar-start .navbar-item:nth-child(3) { transition-delay: 0.12s; }
+  .navbar.is-pulsar .navbar-menu.is-active .navbar-start .navbar-item:nth-child(4) { transition-delay: 0.16s; }
+
+  /* Substitui a barra inferior por um Pill Vertical Luminoso na esquerda no mobile */
+  .navbar.is-pulsar .navbar-menu .navbar-start .navbar-item::after {
+    top: 50% !important;
+    bottom: auto !important;
+    left: 0.45rem !important;
+    width: 4px !important;
+    height: 0 !important;
+    border-radius: 4px !important;
+    transform: translateY(-50%) !important;
+    transition: height 0.22s var(--pulsar-ease) !important;
+  }
+
+  .navbar.is-pulsar .navbar-menu .navbar-start .navbar-item:hover::after,
+  .navbar.is-pulsar .navbar-menu .navbar-start .navbar-item.is-active::after {
+    width: 4px !important;
+    height: 58% !important;
+  }
+
+  /* Barra de controles inferior compacta dentro do Drawer Mobile (Tema + Loja + Sair) */
+  .navbar.is-pulsar .navbar-menu .navbar-end {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding-top: 0.7rem;
+  }
+
+  .navbar.is-pulsar .navbar-menu .navbar-end .navbar-item {
+    padding: 0 !important;
+  }
+
+  .navbar.is-pulsar .navbar-menu .navbar-end #nav-merchant-info {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .navbar.is-pulsar .navbar-menu .navbar-end #nav-merchant-info > div {
+    width: 100%;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .tag.is-merchant-badge {
+    max-width: 175px;
   }
 }
 
