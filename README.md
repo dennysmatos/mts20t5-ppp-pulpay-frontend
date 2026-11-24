@@ -15,6 +15,7 @@ O projeto foi concebido seguindo princípios de **Design for Testability (Padrã
 5. [Boas Práticas de Mercado, UI/UX, Acessibilidade e Segurança](#5-boas-práticas-de-mercado-uiux-acessibilidade-e-segurança)
 6. [Heurísticas e Cenários de Teste E2E / QA (Mentoria 2.0)](#6-heurísticas-e-cenários-de-teste-e2e--qa-mentoria-20)
 7. [Instalação, Configuração e Execução](#7-instalação-configuração-e-execução)
+8. [Documentação da Wiki do GitHub (`wiki/`)](#8-documentação-da-wiki-do-github-wiki)
 
 ---
 
@@ -49,6 +50,7 @@ ppp-pulpay-frontend/
 │   └── server.js               # Inicialização na porta 4000 e carregamento nativo de variáveis .env
 ├── tests/
 │   └── frontend.test.js        # Suíte de testes unitários e de integração (14 testes automatizados)
+├── wiki/                       # Páginas estruturadas para a aba Wiki do GitHub (Home, Sidebar, Footer e Guias)
 ├── .env.example
 ├── .gitignore
 ├── LICENSE
@@ -203,6 +205,20 @@ Sugestões de cenários de teste E2E para execução integrada (Frontend porta `
    npm test
    npm run test:coverage
    ```
+
+---
+
+## 8. Documentação da Wiki do GitHub (`wiki/`)
+
+Toda a documentação modularizada para a aba **Wiki** do GitHub encontra-se estruturada no diretório [`wiki/`](wiki/) deste repositório, consolidando a visão Full-Stack (`ppp-pulpay-frontend` + `ppp-pulpay-backend`):
+
+- **[Home.md](wiki/Home.md):** Visão geral do ecossistema **PulPay (`pulsar payments`)**, contexto didático da **Mentoria 2.0 (Turma 5) — Júlio de Lima** e índice navegável.
+- **[Arquitetura-e-Integracao.md](wiki/Arquitetura-e-Integracao.md):** Diagrama de sequência Full-Stack (Porta `4000` ↔ Porta `3000`), injeção de `VITE_API_BASE_URL`, cliente HTTP `api.js` e segurança OWASP.
+- **[Regras-de-Negocio-e-Contratos.md](wiki/Regras-de-Negocio-e-Contratos.md):** Matriz de rastreabilidade (`RN-FE-01` a `RN-FE-12`), diagrama de estados (`PENDING`, `PAID`, `FAILED`, `REFUNDED`) e catálogo completo de contratos de erro (`400`, `401`, `404`, `409`, `422`, `500`).
+- **[Guia-de-Testabilidade-QA-e-E2E.md](wiki/Guia-de-Testabilidade-QA-e-E2E.md):** Catálogo completo de seletores `data-testid` por módulo e aplicação prática das heurísticas de teste da Mentoria 2.0.
+- **[Design-System-e-Identidade-Visual.md](wiki/Design-System-e-Identidade-Visual.md):** Paleta de cores oficial do Brandbook PulPay, logotipo vetorial SVG, Dark/Light Theme, *Floating Glass Mobile Drawer* e seção estática *"Quem Somos"* com player de vídeo em loop.
+- **[Instalacao-Execucao-e-Deploy.md](wiki/Instalacao-Execucao-e-Deploy.md):** Guia de execução integrada, cobertura de testes e instruções para sincronização direta com o repositório `.wiki.git` do GitHub.
+- **[_Sidebar.md](wiki/_Sidebar.md) & [_Footer.md](wiki/_Footer.md):** Menu lateral e rodapé padronizados para renderização nativa na aba Wiki do GitHub.
 
 ---
 
