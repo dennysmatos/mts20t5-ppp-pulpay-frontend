@@ -40,10 +40,8 @@ function getInitialTheme() {
   if (saved === 'dark' || saved === 'light') {
     return saved;
   }
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    return 'dark';
-  }
-  return 'light';
+  // Identidade visual oficial PulPay tem o Azul Noturno (Dark Mode) como padrão de fábrica
+  return 'dark';
 }
 
 function applyTheme(theme) {

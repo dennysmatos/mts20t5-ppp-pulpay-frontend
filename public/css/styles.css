@@ -1,56 +1,89 @@
+/* ========================================================================= */
+/* IDENTIDADE VISUAL OFICIAL: PULPAY | PULSAR PAYMENTS                       */
+/* Paleta Oficial do Brandbook:                                              */
+/* - Azul Noturno:  #071024 / #0F172A                                        */
+/* - Roxo Cósmico:  #8B5CF6                                                  */
+/* - Azul Elétrico: #0EA5E9                                                  */
+/* - Verde BRL:     #10F57A                                                  */
+/* ========================================================================= */
+
 :root,
-html[data-theme="light"] {
-  --pulsar-primary: #4f46e5;
-  --pulsar-primary-dark: #3730a3;
-  --pulsar-accent: #38bdf8;
-  --pulsar-bg: #f4f6fb;
-  --pulsar-surface: #ffffff;
-  --pulsar-surface-alt: #f8fafc;
-  --pulsar-border: #e2e8f0;
-  --pulsar-border-hover: #818cf8;
-  --pulsar-text: #1e293b;
-  --pulsar-muted: #64748b;
-  --pulsar-success: #10b981;
+html[data-theme="dark"] {
+  --pulpay-night-blue: #071024;
+  --pulpay-night-surface: #0e182c;
+  --pulpay-night-elevated: #15223b;
+  --pulpay-cosmic-purple: #8b5cf6;
+  --pulpay-electric-blue: #0ea5e9;
+  --pulpay-brl-green: #10f57a;
+  --pulpay-brl-green-dark: #059669;
+
+  --pulsar-primary: #0ea5e9;
+  --pulsar-primary-dark: #8b5cf6;
+  --pulsar-accent: #10f57a;
+  --pulsar-bg: #081121;
+  --pulsar-surface: #0f1b31;
+  --pulsar-surface-alt: #162440;
+  --pulsar-border: rgba(14, 165, 233, 0.22);
+  --pulsar-border-hover: #10f57a;
+  --pulsar-text: #f8fafc;
+  --pulsar-muted: #94a3b8;
+  --pulsar-success: #10f57a;
   --pulsar-warning: #f59e0b;
-  --pulsar-danger: #ef4444;
-  --pulsar-purple: #7c3aed;
-  --pulsar-orange: #ea580c;
-  --pulsar-shadow-sm: 0 2px 10px rgba(15, 23, 42, 0.04);
-  --pulsar-shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.06);
-  --pulsar-shadow-glow: 0 12px 28px -6px rgba(79, 70, 229, 0.22);
+  --pulsar-danger: #f43f5e;
+  --pulsar-purple: #8b5cf6;
+  --pulsar-orange: #fb923c;
+  --pulsar-brand-gradient: linear-gradient(135deg, #8b5cf6 0%, #0ea5e9 50%, #10f57a 100%);
+  --pulsar-shadow-sm: 0 4px 18px rgba(4, 9, 20, 0.45);
+  --pulsar-shadow-md: 0 14px 32px -5px rgba(3, 7, 18, 0.65);
+  --pulsar-shadow-glow: 0 12px 30px -6px rgba(16, 245, 122, 0.24), 0 8px 24px -8px rgba(139, 92, 246, 0.32);
   --pulsar-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ========================================================================= */
-/* DARK THEME (Bulma v1 data-theme="dark" + Custom Design Tokens)            */
+/* LIGHT THEME (Alternativa de alto contraste mantendo a paleta PulPay)      */
 /* ========================================================================= */
-html[data-theme="dark"] {
-  --pulsar-primary: #6366f1;
-  --pulsar-primary-dark: #4f46e5;
-  --pulsar-accent: #38bdf8;
-  --pulsar-bg: #0b0f19;
-  --pulsar-surface: #111827;
-  --pulsar-surface-alt: #1e293b;
-  --pulsar-border: #1f2937;
-  --pulsar-border-hover: #6366f1;
-  --pulsar-text: #f1f5f9;
-  --pulsar-muted: #94a3b8;
-  --pulsar-orange: #fb923c;
-  --pulsar-shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.35);
-  --pulsar-shadow-md: 0 14px 30px -5px rgba(0, 0, 0, 0.55);
-  --pulsar-shadow-glow: 0 12px 30px -6px rgba(99, 102, 241, 0.35);
+html[data-theme="light"] {
+  --pulpay-night-blue: #071024;
+  --pulpay-cosmic-purple: #7c3aed;
+  --pulpay-electric-blue: #0284c7;
+  --pulpay-brl-green: #10f57a;
+  --pulpay-brl-green-dark: #059669;
+
+  --pulsar-primary: #0284c7;
+  --pulsar-primary-dark: #7c3aed;
+  --pulsar-accent: #059669;
+  --pulsar-bg: #f1f5f9;
+  --pulsar-surface: #ffffff;
+  --pulsar-surface-alt: #f8fafc;
+  --pulsar-border: #cbd5e1;
+  --pulsar-border-hover: #0ea5e9;
+  --pulsar-text: #0f172a;
+  --pulsar-muted: #475569;
+  --pulsar-orange: #ea580c;
+  --pulsar-brand-gradient: linear-gradient(135deg, #8b5cf6 0%, #0ea5e9 52%, #10f57a 100%);
+  --pulsar-shadow-sm: 0 2px 12px rgba(7, 16, 36, 0.06);
+  --pulsar-shadow-md: 0 12px 26px -5px rgba(7, 16, 36, 0.12);
+  --pulsar-shadow-glow: 0 12px 28px -6px rgba(14, 165, 233, 0.22), 0 6px 18px -6px rgba(139, 92, 246, 0.2);
 }
 
 html, body {
   background-color: var(--pulsar-bg);
   color: var(--pulsar-text);
   min-height: 100vh;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: 'Inter', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
   transition: background-color 0.25s var(--pulsar-ease), color 0.25s var(--pulsar-ease);
 }
 
+html[data-theme="dark"] body {
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(139, 92, 246, 0.14) 0%, transparent 38%),
+    radial-gradient(circle at 88% 15%, rgba(16, 245, 122, 0.1) 0%, transparent 35%),
+    radial-gradient(circle at 50% 85%, rgba(14, 165, 233, 0.1) 0%, transparent 45%);
+  background-attachment: fixed;
+}
+
 /* ========================================================================= */
-/* NAVBAR FIXA NO TOPO COM EFEITO GLASSMORPHISM & HOVER                      */
+/* NAVBAR FIXA NO TOPO COM IDENTIDADE PULPAY (AZUL NOTURNO + GLOW NEON)      */
 /* ========================================================================= */
 .navbar.is-pulsar.is-fixed-top {
   position: fixed;
@@ -58,26 +91,93 @@ html, body {
   left: 0;
   right: 0;
   z-index: 40;
-  background: linear-gradient(135deg, rgba(30, 27, 75, 0.94) 0%, rgba(49, 46, 129, 0.94) 50%, rgba(67, 56, 202, 0.94) 100%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.22);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(7, 16, 36, 0.94) 0%, rgba(13, 25, 48, 0.94) 55%, rgba(19, 30, 62, 0.94) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 24px rgba(3, 7, 18, 0.55);
+  border-bottom: 1px solid rgba(16, 245, 122, 0.25);
   transition: background 0.25s var(--pulsar-ease), box-shadow 0.25s var(--pulsar-ease);
-}
-
-html[data-theme="dark"] .navbar.is-pulsar.is-fixed-top {
-  background: linear-gradient(135deg, rgba(9, 13, 24, 0.95) 0%, rgba(17, 24, 39, 0.95) 55%, rgba(30, 27, 75, 0.95) 100%);
-  border-bottom: 1px solid rgba(99, 102, 241, 0.25);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.55);
 }
 
 .navbar.is-pulsar .navbar-brand .navbar-item,
 .navbar.is-pulsar .navbar-menu .navbar-item {
-  color: rgba(255, 255, 255, 0.88);
+  color: rgba(248, 250, 252, 0.9);
   font-weight: 500;
   position: relative;
   transition: color 0.2s var(--pulsar-ease), background-color 0.2s var(--pulsar-ease), transform 0.2s var(--pulsar-ease);
+}
+
+/* Logotipo & Ícone do App PulPay (P + Onda de Pulso) */
+.pulpay-brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.pulsar-logo-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #071024;
+  border-radius: 11px;
+  padding: 4px;
+  border: 1.5px solid rgba(16, 245, 122, 0.55);
+  box-shadow: 0 0 14px rgba(16, 245, 122, 0.28), inset 0 0 10px rgba(139, 92, 246, 0.25);
+  transition: transform 0.25s var(--pulsar-ease), box-shadow 0.25s var(--pulsar-ease), border-color 0.25s var(--pulsar-ease);
+}
+
+.pulsar-logo-badge.is-large-badge {
+  width: 58px;
+  height: 58px;
+  border-radius: 15px;
+  padding: 6px;
+}
+
+.pulpay-logo-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.navbar-brand .navbar-item:hover .pulsar-logo-badge {
+  transform: translateY(-1px) scale(1.06);
+  border-color: #10f57a;
+  box-shadow: 0 0 20px rgba(16, 245, 122, 0.55), 0 0 12px rgba(14, 165, 233, 0.45);
+}
+
+/* Tipografia da Marca: PulPay (Pul branco + Pay verde BRL) e pulsar payments */
+.pulpay-brand-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.pulpay-title-main {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.pulpay-title-main .pulpay-title-accent {
+  background: linear-gradient(90deg, #0ea5e9 0%, #10f57a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+.pulpay-subtitle-tag {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+}
+
+.pulpay-subtitle-tag strong {
+  color: #e2e8f0;
+  font-weight: 700;
 }
 
 .navbar.is-pulsar .navbar-menu .navbar-start .navbar-item {
@@ -91,73 +191,52 @@ html[data-theme="dark"] .navbar.is-pulsar.is-fixed-top {
   bottom: 4px;
   left: 50%;
   width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #38bdf8, #a5b4fc);
+  height: 2.5px;
+  background: var(--pulsar-brand-gradient);
   border-radius: 2px;
   transform: translateX(-50%);
   transition: width 0.25s var(--pulsar-ease);
 }
 
 .navbar.is-pulsar .navbar-menu .navbar-start .navbar-item:hover {
-  background-color: rgba(255, 255, 255, 0.12);
+  background-color: rgba(14, 165, 233, 0.14);
   color: #ffffff;
   transform: translateY(-1px);
 }
 
 .navbar.is-pulsar .navbar-menu .navbar-start .navbar-item:hover::after,
 .navbar.is-pulsar .navbar-menu .navbar-start .navbar-item.is-active::after {
-  width: 65%;
+  width: 68%;
 }
 
 .navbar.is-pulsar .navbar-menu .navbar-start .navbar-item.is-active {
-  background-color: rgba(255, 255, 255, 0.16);
-  color: #ffffff;
+  background-color: rgba(16, 245, 122, 0.12);
+  color: #10f57a;
   font-weight: 600;
-}
-
-.pulsar-logo-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  background: linear-gradient(135deg, #38bdf8, #818cf8);
-  color: #0f172a;
-  font-weight: 800;
-  border-radius: 8px;
-  margin-right: 10px;
-  font-size: 1.1rem;
-  box-shadow: 0 2px 8px rgba(56, 189, 248, 0.4);
-  transition: transform 0.25s var(--pulsar-ease), box-shadow 0.25s var(--pulsar-ease);
-}
-
-.navbar-brand .navbar-item:hover .pulsar-logo-badge {
-  transform: rotate(-6deg) scale(1.08);
-  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.65);
 }
 
 /* Botão de Alternância de Tema (Light/Dark) */
 .button.is-theme-toggle {
-  background: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(15, 27, 49, 0.85);
+  color: #f8fafc;
+  border: 1px solid rgba(16, 245, 122, 0.4);
   border-radius: 999px;
   font-weight: 600;
-  padding-left: 0.85rem;
-  padding-right: 0.85rem;
+  padding-left: 0.9rem;
+  padding-right: 0.9rem;
   transition: all 0.22s var(--pulsar-ease);
 }
 
 .button.is-theme-toggle:hover {
-  background: rgba(255, 255, 255, 0.22);
-  color: #ffffff;
-  border-color: #38bdf8;
+  background: rgba(16, 245, 122, 0.16);
+  color: #10f57a;
+  border-color: #10f57a;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+  box-shadow: 0 0 16px rgba(16, 245, 122, 0.32);
 }
 
 /* ========================================================================= */
-/* AUTH CARD                                                                 */
+/* AUTH CARD COM IDENTIDADE PULPAY (HERO LOGO + ONDA DE PULSO)               */
 /* ========================================================================= */
 .auth-wrapper {
   min-height: calc(100vh - 140px);
@@ -169,39 +248,96 @@ html[data-theme="dark"] .navbar.is-pulsar.is-fixed-top {
 
 .auth-card {
   width: 100%;
-  max-width: 480px;
-  border-radius: 14px;
+  max-width: 490px;
+  border-radius: 16px;
   box-shadow: var(--pulsar-shadow-md);
-  border: 1px solid var(--pulsar-border);
+  border: 1px solid rgba(16, 245, 122, 0.32);
   background: var(--pulsar-surface);
   overflow: hidden;
   transition: transform 0.28s var(--pulsar-ease), box-shadow 0.28s var(--pulsar-ease), border-color 0.28s var(--pulsar-ease);
 }
 
 .auth-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   box-shadow: var(--pulsar-shadow-glow);
-  border-color: var(--pulsar-border-hover);
+  border-color: #10f57a;
 }
 
 .auth-card-header {
-  background: linear-gradient(135deg, #1e1b4b 0%, #3730a3 100%);
+  background:
+    radial-gradient(circle at 85% 20%, rgba(16, 245, 122, 0.22) 0%, transparent 45%),
+    radial-gradient(circle at 15% 80%, rgba(139, 92, 246, 0.28) 0%, transparent 50%),
+    linear-gradient(135deg, #071024 0%, #0f1b33 60%, #132342 100%);
   color: #ffffff;
-  padding: 1.75rem 2rem;
+  padding: 1.85rem 2rem;
   text-align: center;
+  border-bottom: 1px solid rgba(16, 245, 122, 0.25);
+}
+
+.auth-brand-hero {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+}
+
+.auth-brand-titles {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.15;
+}
+
+.auth-wordmark-pulsar {
+  font-size: 1.35rem;
+  color: #f8fafc;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+
+.auth-wordmark-pulsar strong {
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.auth-wordmark-pulpay {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.auth-wordmark-pulpay span {
+  background: linear-gradient(90deg, #0ea5e9 0%, #10f57a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.auth-tagline-caps {
+  color: #cbd5e1 !important;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  font-size: 0.7rem !important;
 }
 
 .auth-card-body {
   padding: 2rem;
 }
 
+/* Abas Login / Cadastro com Gradiente PulPay */
+.tabs.is-toggle li.is-active a {
+  background: linear-gradient(135deg, #8b5cf6 0%, #0ea5e9 60%, #10b981 100%) !important;
+  border-color: #0ea5e9 !important;
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
 /* ========================================================================= */
-/* CARDS, PAINÉIS E KPI BOXES COM HOVER ELEVATION (MELHORES PRÁTICAS)        */
+/* CARDS DE CARTEIRAS BRL, PAINÉIS E KPI BOXES (MOCKUP PULPAY)               */
 /* ========================================================================= */
 .pulsar-card {
   background: var(--pulsar-surface);
-  border-radius: 12px;
-  border: 1px solid var(--pulsar-border);
+  border-radius: 14px;
+  border: 1px solid rgba(16, 245, 122, 0.28);
   box-shadow: var(--pulsar-shadow-sm);
   transition: transform 0.25s var(--pulsar-ease), box-shadow 0.25s var(--pulsar-ease), border-color 0.25s var(--pulsar-ease);
   height: 100%;
@@ -215,16 +351,16 @@ html[data-theme="dark"] .navbar.is-pulsar.is-fixed-top {
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--pulsar-primary), var(--pulsar-accent));
-  opacity: 0;
-  transition: opacity 0.25s var(--pulsar-ease);
+  height: 3.5px;
+  background: var(--pulsar-brand-gradient);
+  opacity: 0.85;
+  transition: opacity 0.25s var(--pulsar-ease), height 0.25s var(--pulsar-ease);
 }
 
 .pulsar-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--pulsar-shadow-glow);
-  border-color: var(--pulsar-border-hover);
+  border-color: #10f57a;
 }
 
 .pulsar-card:hover::before {
@@ -233,7 +369,7 @@ html[data-theme="dark"] .navbar.is-pulsar.is-fixed-top {
 
 .pulsar-panel {
   background: var(--pulsar-surface);
-  border-radius: 12px;
+  border-radius: 14px;
   border: 1px solid var(--pulsar-border);
   box-shadow: var(--pulsar-shadow-sm);
   padding: 1.5rem;
@@ -243,29 +379,42 @@ html[data-theme="dark"] .navbar.is-pulsar.is-fixed-top {
 
 .pulsar-panel:hover {
   box-shadow: var(--pulsar-shadow-md);
-  border-color: rgba(99, 102, 241, 0.35);
+  border-color: rgba(14, 165, 233, 0.45);
 }
 
-/* KPI Boxes */
+/* KPI Boxes com Borda Neon Sutil conforme App PulPay */
 .kpi-box {
   background: var(--pulsar-surface);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 1.25rem 1.5rem;
   border: 1px solid var(--pulsar-border);
   box-shadow: var(--pulsar-shadow-sm);
+  position: relative;
+  overflow: hidden;
   transition: transform 0.25s var(--pulsar-ease), box-shadow 0.25s var(--pulsar-ease), border-color 0.25s var(--pulsar-ease);
+}
+
+.kpi-box::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--pulsar-brand-gradient);
+  opacity: 0.7;
 }
 
 .kpi-box:hover {
   transform: translateY(-4px);
   box-shadow: var(--pulsar-shadow-glow);
-  border-color: var(--pulsar-border-hover);
+  border-color: #10f57a;
 }
 
 .kpi-box .kpi-label {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   color: var(--pulsar-muted);
   font-weight: 700;
   margin-bottom: 0.35rem;
@@ -278,15 +427,36 @@ html[data-theme="dark"] .navbar.is-pulsar.is-fixed-top {
 }
 
 /* ========================================================================= */
-/* MICRO-INTERAÇÕES DE HOVER EM BOTÕES, INPUTS, TABELAS E BOXES              */
+/* BOTÕES COM PALETA PULPAY (ROXO CÓSMICO, AZUL ELÉTRICO E VERDE BRL)        */
 /* ========================================================================= */
 .button {
   transition: transform 0.18s var(--pulsar-ease), box-shadow 0.18s var(--pulsar-ease), background-color 0.18s var(--pulsar-ease), border-color 0.18s var(--pulsar-ease);
 }
 
+.button.is-primary {
+  background: linear-gradient(135deg, #0ea5e9 0%, #10f57a 100%) !important;
+  color: #071024 !important;
+  border: none !important;
+  font-weight: 700;
+}
+
+.button.is-primary:hover {
+  box-shadow: 0 6px 20px rgba(16, 245, 122, 0.38) !important;
+}
+
+.button.is-link {
+  background: linear-gradient(135deg, #8b5cf6 0%, #0ea5e9 100%) !important;
+  color: #ffffff !important;
+  border: none !important;
+  font-weight: 700;
+}
+
+.button.is-link:hover {
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.42) !important;
+}
+
 .button:not(:disabled):not(.is-ghost):hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.14);
 }
 
 .button:not(:disabled):active {
@@ -299,30 +469,52 @@ html[data-theme="dark"] .navbar.is-pulsar.is-fixed-top {
   transition: border-color 0.2s var(--pulsar-ease), box-shadow 0.2s var(--pulsar-ease), background-color 0.2s var(--pulsar-ease);
 }
 
+html[data-theme="dark"] .input,
+html[data-theme="dark"] .textarea,
+html[data-theme="dark"] .select select {
+  background-color: #091326;
+  border-color: rgba(148, 163, 184, 0.25);
+  color: #f8fafc;
+}
+
 .input:hover,
 .textarea:hover,
 .select select:hover {
-  border-color: var(--pulsar-border-hover);
+  border-color: #0ea5e9 !important;
 }
 
 .input:focus,
 .textarea:focus,
 .select select:focus {
-  border-color: var(--pulsar-primary);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+  border-color: #10f57a !important;
+  box-shadow: 0 0 0 3px rgba(16, 245, 122, 0.2) !important;
 }
 
 /* Tabelas interativas no hover */
 .table.is-hoverable tbody tr {
-  transition: background-color 0.18s var(--pulsar-ease), transform 0.18s var(--pulsar-ease);
+  transition: background-color 0.18s var(--pulsar-ease);
 }
 
 .table.is-hoverable tbody tr:hover {
-  background-color: rgba(79, 70, 229, 0.06) !important;
+  background-color: rgba(14, 165, 233, 0.08) !important;
+}
+
+html[data-theme="dark"] .table {
+  background-color: transparent;
+  color: var(--pulsar-text);
+}
+
+html[data-theme="dark"] .table th {
+  color: #94a3b8 !important;
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+html[data-theme="dark"] .table td {
+  border-color: rgba(148, 163, 184, 0.12);
 }
 
 html[data-theme="dark"] .table.is-hoverable tbody tr:hover {
-  background-color: rgba(99, 102, 241, 0.14) !important;
+  background-color: rgba(16, 245, 122, 0.08) !important;
 }
 
 /* Boxes internos e adaptações Dark Mode */
@@ -333,12 +525,13 @@ html[data-theme="dark"] .table.is-hoverable tbody tr:hover {
 }
 
 .box:hover {
-  border-color: rgba(99, 102, 241, 0.45);
+  border-color: rgba(16, 245, 122, 0.45);
 }
 
 html[data-theme="dark"] .box.has-background-light {
   background-color: var(--pulsar-surface-alt) !important;
   color: var(--pulsar-text) !important;
+  border-color: rgba(14, 165, 233, 0.24);
 }
 
 html[data-theme="dark"] .title,
@@ -353,11 +546,11 @@ html[data-theme="dark"] .has-text-grey {
 }
 
 html[data-theme="dark"] .has-text-success-dark {
-  color: #34d399 !important;
+  color: #10f57a !important;
 }
 
 /* ========================================================================= */
-/* SEMÂNTICA VISUAL DE VALORES E ESTADOS (RN-FE-09)                          */
+/* SEMÂNTICA VISUAL DE VALORES E ESTADOS (RN-FE-09 COM VERDE BRL E ROXO)     */
 /* ========================================================================= */
 .amount-credit-paid {
   color: #059669 !important;
@@ -365,7 +558,7 @@ html[data-theme="dark"] .has-text-success-dark {
 }
 
 html[data-theme="dark"] .amount-credit-paid {
-  color: #34d399 !important;
+  color: #10f57a !important;
 }
 
 .amount-debit-paid {
@@ -384,20 +577,20 @@ html[data-theme="dark"] .amount-credit-paid {
 }
 
 .tag:hover {
-  transform: scale(1.03);
+  transform: scale(1.04);
 }
 
 .tag.is-status-paid {
   background-color: #d1fae5;
   color: #065f46;
   font-weight: 700;
-  border: 1px solid #6ee7b7;
+  border: 1px solid #10b981;
 }
 
 html[data-theme="dark"] .tag.is-status-paid {
-  background-color: rgba(16, 185, 129, 0.2);
-  color: #6ee7b7;
-  border-color: rgba(16, 185, 129, 0.45);
+  background-color: rgba(16, 245, 122, 0.16);
+  color: #10f57a;
+  border-color: rgba(16, 245, 122, 0.5);
 }
 
 .tag.is-status-pending {
@@ -408,7 +601,7 @@ html[data-theme="dark"] .tag.is-status-paid {
 }
 
 html[data-theme="dark"] .tag.is-status-pending {
-  background-color: rgba(245, 158, 11, 0.2);
+  background-color: rgba(245, 158, 11, 0.18);
   color: #fcd34d;
   border-color: rgba(245, 158, 11, 0.45);
 }
@@ -421,22 +614,22 @@ html[data-theme="dark"] .tag.is-status-pending {
 }
 
 html[data-theme="dark"] .tag.is-status-failed {
-  background-color: rgba(239, 68, 68, 0.2);
-  color: #fca5a5;
-  border-color: rgba(239, 68, 68, 0.45);
+  background-color: rgba(244, 63, 94, 0.2);
+  color: #fda4af;
+  border-color: rgba(244, 63, 94, 0.45);
 }
 
 .tag.is-status-refunded {
   background-color: #ede9fe;
   color: #5b21b6;
   font-weight: 700;
-  border: 1px solid #c4b5fd;
+  border: 1px solid #8b5cf6;
 }
 
 html[data-theme="dark"] .tag.is-status-refunded {
-  background-color: rgba(124, 58, 237, 0.22);
+  background-color: rgba(139, 92, 246, 0.22);
   color: #c4b5fd;
-  border-color: rgba(124, 58, 237, 0.5);
+  border-color: rgba(139, 92, 246, 0.55);
 }
 
 /* Badges de Status de Conta (RN-FE-06) */
@@ -444,13 +637,13 @@ html[data-theme="dark"] .tag.is-status-refunded {
   background-color: #d1fae5;
   color: #065f46;
   font-weight: 700;
-  border: 1px solid #6ee7b7;
+  border: 1px solid #10b981;
 }
 
 html[data-theme="dark"] .tag.is-account-active {
-  background-color: rgba(16, 185, 129, 0.2);
-  color: #6ee7b7;
-  border-color: rgba(16, 185, 129, 0.45);
+  background-color: rgba(16, 245, 122, 0.16);
+  color: #10f57a;
+  border-color: rgba(16, 245, 122, 0.5);
 }
 
 .tag.is-account-blocked {
@@ -461,43 +654,43 @@ html[data-theme="dark"] .tag.is-account-active {
 }
 
 html[data-theme="dark"] .tag.is-account-blocked {
-  background-color: rgba(239, 68, 68, 0.2);
-  color: #fca5a5;
-  border-color: rgba(239, 68, 68, 0.45);
+  background-color: rgba(244, 63, 94, 0.2);
+  color: #fda4af;
+  border-color: rgba(244, 63, 94, 0.45);
 }
 
 /* Código e Assinaturas HMAC */
 .hmac-code-block {
   font-family: 'Fira Code', 'JetBrains Mono', monospace;
   font-size: 0.82rem;
-  background-color: #0f172a;
-  color: #38bdf8;
+  background-color: #071024;
+  color: #10f57a;
   padding: 0.75rem 1rem;
   border-radius: 8px;
   word-break: break-all;
-  border: 1px solid #1e293b;
+  border: 1px solid rgba(16, 245, 122, 0.35);
   transition: border-color 0.2s var(--pulsar-ease), box-shadow 0.2s var(--pulsar-ease);
 }
 
 .hmac-code-block:hover {
-  border-color: #38bdf8;
-  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.18);
+  border-color: #10f57a;
+  box-shadow: 0 0 0 2px rgba(16, 245, 122, 0.2);
 }
 
 .json-pre {
-  background-color: #0f172a;
+  background-color: #071024;
   color: #e2e8f0;
   padding: 1rem;
   border-radius: 8px;
   font-size: 0.82rem;
   max-height: 280px;
   overflow-y: auto;
-  border: 1px solid #1e293b;
+  border: 1px solid rgba(14, 165, 233, 0.25);
   transition: border-color 0.2s var(--pulsar-ease);
 }
 
 .json-pre:hover {
-  border-color: #475569;
+  border-color: #0ea5e9;
 }
 
 /* Empty State */
@@ -512,7 +705,16 @@ html[data-theme="dark"] .tag.is-account-blocked {
 }
 
 .empty-state:hover {
-  border-color: var(--pulsar-border-hover);
+  border-color: #10f57a;
+}
+
+/* Garantias estruturais para o Modal e espaçamento da Navbar Fixa */
+body.has-navbar-fixed-top {
+  padding-top: 3.75rem;
+}
+
+.modal:not(.is-active) {
+  display: none !important;
 }
 
 /* Utilitários */
@@ -526,8 +728,8 @@ html[data-theme="dark"] .tag.is-account-blocked {
 }
 
 .field-error-highlight {
-  border-color: #ef4444 !important;
-  box-shadow: 0 0 0 0.125em rgba(239, 68, 68, 0.25) !important;
+  border-color: #f43f5e !important;
+  box-shadow: 0 0 0 0.125em rgba(244, 63, 94, 0.25) !important;
 }
 
 .table td, .table th {

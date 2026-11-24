@@ -301,6 +301,10 @@ describe('Servidor Express Web Frontend & Seletores QA (data-testid)', () => {
     const resJson = await invokeExpressApp('/api/config');
     assert.equal(resJson.status, 200);
     assert.equal(resJson.json().VITE_API_BASE_URL, 'http://localhost:3000');
+
+    const resBulma = await invokeExpressApp('/vendor/bulma/bulma.min.css');
+    assert.equal(resBulma.status, 200);
+    assert.ok(resBulma.text.includes('bulma'));
   });
 
   it('Rotas da aplicação (/login, /register, /dashboard, /accounts, /transactions, /webhooks) devem conter os data-testid exigidos, navbar fixa e Dark Theme', async () => {
@@ -312,6 +316,8 @@ describe('Servidor Express Web Frontend & Seletores QA (data-testid)', () => {
       assert.ok(html.includes('is-fixed-top'), 'Navbar deve estar fixa no topo (is-fixed-top)');
       assert.ok(html.includes('has-navbar-fixed-top'), 'Body/HTML deve conter has-navbar-fixed-top');
       assert.ok(html.includes('data-testid="btn-theme-toggle"'), 'Deve conter botão de alternância Dark/Light Theme');
+      assert.ok(html.includes('pulpay-logo-svg'), 'Deve conter o logotipo vetorial PulPay com onda de pulso');
+      assert.ok(html.includes('PulPay'), 'Deve conter a tipografia PulPay do brandbook');
 
       const requiredTestIds = [
         'input-name',
