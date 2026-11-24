@@ -44,6 +44,12 @@ function getInitialTheme() {
   return 'dark';
 }
 
+const SUN_SVG_ICON =
+  '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+
+const MOON_SVG_ICON =
+  '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+
 function applyTheme(theme) {
   const normalized = theme === 'dark' ? 'dark' : 'light';
   document.documentElement.setAttribute('data-theme', normalized);
@@ -53,11 +59,11 @@ function applyTheme(theme) {
   const btnEl = document.getElementById('btn-theme-toggle');
   if (iconEl) {
     if (normalized === 'dark') {
-      iconEl.textContent = '☀️';
+      iconEl.innerHTML = SUN_SVG_ICON;
       btnEl?.setAttribute('title', 'Alternar para Modo Claro');
       btnEl?.setAttribute('aria-label', 'Alternar para Modo Claro');
     } else {
-      iconEl.textContent = '🌙';
+      iconEl.innerHTML = MOON_SVG_ICON;
       btnEl?.setAttribute('title', 'Alternar para Modo Escuro');
       btnEl?.setAttribute('aria-label', 'Alternar para Modo Escuro');
     }
@@ -711,7 +717,7 @@ function renderAccountsList() {
                     data-account-id="${escapeHtml(id)}"
                     data-testid="btn-inspect-account-${escapeHtml(id)}"
                   >
-                    🔍 Atualizar saldo
+                    Atualizar saldo
                   </button>
                 </div>
               </div>
@@ -878,7 +884,7 @@ function updateSelectedAccountBalanceHint() {
   }
 
   if (account.status === 'BLOCKED') {
-    hintEl.textContent = `⚠️ Atenção: Carteira BLOQUEADA (BLOCKED). Movimentações retornarão 422 ACCOUNT_BLOCKED.`;
+    hintEl.textContent = `Atenção: Carteira BLOQUEADA (BLOCKED). Movimentações retornarão 422 ACCOUNT_BLOCKED.`;
     hintEl.className = 'help is-danger has-text-weight-semibold';
   } else {
     hintEl.textContent = `Saldo disponível na carteira selecionada: ${formatCurrencyBRL(account.balance)}`;
@@ -1031,7 +1037,7 @@ function renderTransactionsTable() {
                     data-testid="btn-refund-${escapeHtml(id)}"
                     title="Solicitar estorno desta transação liquidada"
                   >
-                    ↩️ Solicitar Estorno
+                    Solicitar Estorno
                   </button>`
                 : `<button
                     type="button"
@@ -1260,7 +1266,7 @@ function openRefundModal(transactionId) {
   if (isCredit) {
     // RN-FE-10: Estorno de CHARGE / CREDIT debitará o valor da carteira
     if (impactTitle) {
-      impactTitle.textContent = '⚠️ Estorno de Entrada (CHARGE / CREDIT) — Débito na Carteira';
+      impactTitle.textContent = 'Estorno de Entrada (CHARGE / CREDIT) — Débito na Carteira';
     }
     if (impactDesc) {
       impactDesc.textContent = `Este estorno DEBITARÁ ${formatCurrencyBRL(tx.amount)} do saldo da carteira associada. Exige saldo disponível suficiente (caso contrário a API retornará 422 INSUFFICIENT_FUNDS_FOR_REFUND).`;
@@ -1268,7 +1274,7 @@ function openRefundModal(transactionId) {
   } else {
     // RN-FE-10: Estorno de PAYMENT / DEBIT devolverá (creditará) o valor para a carteira
     if (impactTitle) {
-      impactTitle.textContent = 'ℹ️ Estorno de Saída (PAYMENT / DEBIT) — Crédito na Carteira';
+      impactTitle.textContent = 'Estorno de Saída (PAYMENT / DEBIT) — Crédito na Carteira';
     }
     if (impactDesc) {
       impactDesc.textContent = `Este estorno DEVOLVERÁ (creditará) + ${formatCurrencyBRL(tx.amount)} para o saldo da carteira associada.`;
@@ -1428,7 +1434,7 @@ function renderWebhooksList() {
                                 title="Copiar assinatura HMAC"
                                 data-testid="btn-copy-sig-${escapeHtml(logId)}"
                               >
-                                📋 Copiar
+                                Copiar
                               </button>
                             </div>
                           </td>
@@ -1465,7 +1471,7 @@ function renderWebhooksList() {
                 data-webhook-id="${escapeHtml(id)}"
                 data-testid="btn-toggle-logs-${escapeHtml(id)}"
               >
-                ${isExpanded ? '🔼 Ocultar Logs' : `🔽 Inspecionar Entregas (${logs.length})`}
+                ${isExpanded ? 'Ocultar Logs' : `Inspecionar Entregas (${logs.length})`}
               </button>
             </div>
           </div>
@@ -1730,7 +1736,7 @@ function bindGlobalEvents() {
     if (!aboutVideo) return;
     if (btnVideoPlay) {
       const isPaused = aboutVideo.paused;
-      btnVideoPlay.innerHTML = isPaused ? '▶️ Reproduzir' : '⏸️ Pausar';
+      btnVideoPlay.textContent = isPaused ? 'Reproduzir' : 'Pausar';
       btnVideoPlay.setAttribute(
         'aria-label',
         isPaused ? 'Retomar reprodução do vídeo' : 'Interromper reprodução do vídeo'
@@ -1738,7 +1744,7 @@ function bindGlobalEvents() {
     }
     if (btnVideoMute) {
       const isMuted = aboutVideo.muted;
-      btnVideoMute.innerHTML = isMuted ? '🔇 Ativar Som' : '🔊 Mutar';
+      btnVideoMute.textContent = isMuted ? 'Ativar Som' : 'Mutar';
       btnVideoMute.setAttribute(
         'aria-label',
         isMuted ? 'Ativar áudio do vídeo' : 'Silenciar áudio do vídeo'
@@ -1879,10 +1885,10 @@ function bindGlobalEvents() {
 
     if (secretInput.type === 'password') {
       secretInput.type = 'text';
-      toggleBtn.textContent = '🙈 Ocultar';
+      toggleBtn.textContent = 'Ocultar';
     } else {
       secretInput.type = 'password';
-      toggleBtn.textContent = '👁️ Mostrar';
+      toggleBtn.textContent = 'Mostrar';
     }
   });
 

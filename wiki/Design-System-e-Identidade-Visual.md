@@ -31,9 +31,9 @@ A interface do **PulPay (`pulsar payments`)** foi projetada seguindo o Brandbook
 
 1. **Barra de Navegação Fixa (`is-fixed-top`) com Glassmorphism:**
    - Permanece fixa no topo durante a rolagem com `backdrop-filter: blur(14px)`.
-   - Inclui o **botão circular minimalista de tema** (`☀️` / `🌙`), o **chip da Loja autenticada** com indicador verde neon pulsante (exibindo apenas a Razão Social/Nome da Loja e mantendo o e-mail no tooltip) e o botão `"Sair da Conta"` harmônico com o tema escuro.
+   - Inclui o **botão circular minimalista de tema** (ícone vetorial SVG Sol / Lua), o **chip da Loja autenticada** com indicador verde neon pulsante (exibindo apenas a Razão Social/Nome da Loja e mantendo o e-mail no tooltip) e o botão `"Sair da Conta"` harmônico com o tema escuro.
 2. **Menu Mobile Flutuante (*Floating Glass Popover Drawer*):**
    - Em telas `< 1024px`, o botão hambúrguer abre um card flutuante com vidro fosco (`backdrop-filter: blur(18px)`), borda neon Verde BRL, entrada em cascata (*staggered animation*) dos links, indicador vertical luminoso à esquerda e *backdrop* escurecido que fecha o menu automaticamente ao tocar fora ou navegar.
 3. **Seção Estática `"Quem Somos"` com Player de Vídeo em Loop Infinito:**
    - Apresenta o contexto didático da **Mentoria 2.0 (Júlio de Lima)** com os badges **`Projeto de Portfólio Pessoal - Turma 5`** e **`By Dennys Matos`**.
-   - Conta com o player de vídeo demonstrativo (`/media/video_pulpay.mp4`) configurado em reprodução automática e contínua (`autoplay`, `loop`, `muted`, `playsinline`) e botões dedicados na moldura superior para **Pausar/Reproduzir** (`⏸️ Pausar` / `▶️ Reproduzir`) e **Ativar Som/Mutar** (`🔇 Ativar Som` / `🔊 Mutar`).
+   - Conta com o player de vídeo demonstrativo (`/media/video_pulpay.mp4`) configurado em reprodução automática e contínua (`autoplay`, `loop`, `muted`, `playsinline`) e botões dedicados na moldura superior para **Pausar/Reproduzir** e **Ativar Som/Mutar**.

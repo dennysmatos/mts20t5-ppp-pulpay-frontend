@@ -32,7 +32,7 @@ const API_BASE_URL =
 
 app.listen(PORT, () => {
   console.log('====================================================');
-  console.log(`🚀 Pulsar Payments Web rodando em: http://localhost:${PORT}`);
-  console.log(`🔗 Conectado à API Backend em:     ${API_BASE_URL}`);
+  console.log(`Pulsar Payments Web rodando em: http://localhost:${PORT}`);
+  console.log(`Conectado à API Backend em:     ${API_BASE_URL}`);
   console.log('====================================================');
 });

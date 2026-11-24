@@ -15,7 +15,7 @@ O **PulPay (`ppp-pulpay-frontend`)** foi construído aplicando **Design for Test
 | Link Transações & Conciliação | `nav-transactions` | Navega para `/transactions` |
 | Link Webhooks & HMAC | `nav-webhooks` | Navega para `/webhooks` |
 | Link Quem Somos | `nav-about` | Rola suavemente até a seção `#quem-somos` |
-| Botão Minimalista de Tema | `btn-theme-toggle` | Alterna entre `data-theme="dark"` (`☀️`) e `data-theme="light"` (`🌙`) |
+| Botão Minimalista de Tema | `btn-theme-toggle` | Alterna entre `data-theme="dark"` e `data-theme="light"` |
 | Badge do Lojista Logado | `merchant-header-info` | Exibe o nome da Loja autenticada e tooltip com o e-mail |
 | Botão Sair da Conta | `btn-logout` | Limpa a sessão JWT e redireciona para `/login` |
 | Alerta Global de Erro | `alert-error-message` | `role="alert"` (`aria-live="assertive"`) com a mensagem da API |
