@@ -29,6 +29,14 @@ const bulmaNodeModulesFile = path.resolve(
   __dirname,
   '../node_modules/bulma/css/bulma.min.css'
 );
+const faviconFile = path.join(publicDir, 'favicon.svg');
+
+app.get(['/favicon.svg', '/favicon.ico'], (_req, res) => {
+  const svg = fs.readFileSync(faviconFile, 'utf-8');
+  res.setHeader('Content-Type', 'image/svg+xml; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=86400');
+  res.status(200).send(svg);
+});
 
 app.get('/vendor/bulma/bulma.min.css', (_req, res) => {
   const target = fs.existsSync(bulmaStaticFile)

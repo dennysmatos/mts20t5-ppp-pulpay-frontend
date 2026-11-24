@@ -305,6 +305,10 @@ describe('Servidor Express Web Frontend & Seletores QA (data-testid)', () => {
     const resBulma = await invokeExpressApp('/vendor/bulma/bulma.min.css');
     assert.equal(resBulma.status, 200);
     assert.ok(resBulma.text.includes('bulma'));
+
+    const resFavicon = await invokeExpressApp('/favicon.svg');
+    assert.equal(resFavicon.status, 200);
+    assert.ok(resFavicon.text.includes('<svg'));
   });
 
   it('Rotas da aplicação (/login, /register, /dashboard, /accounts, /transactions, /webhooks) devem conter os data-testid exigidos, navbar fixa e Dark Theme', async () => {

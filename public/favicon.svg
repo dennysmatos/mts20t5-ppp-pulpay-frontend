@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="pulpayFavGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8B5CF6" />
+      <stop offset="50%" stop-color="#0EA5E9" />
+      <stop offset="100%" stop-color="#10F57A" />
+    </linearGradient>
+    <linearGradient id="pulpayBorderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0EA5E9" />
+      <stop offset="100%" stop-color="#10F57A" />
+    </linearGradient>
+  </defs>
+  <!-- Fundo Azul Noturno com Borda Neon (Brandbook PulPay) -->
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="#071024" stroke="url(#pulpayBorderGrad)" stroke-width="3" />
+  <!-- Letra P estilizada -->
+  <path
+    d="M21 14H35.5C43.232 14 49.5 19.82 49.5 27C49.5 34.18 43.232 40 35.5 40H28.5V50H21V14ZM28.5 21V33H35.1C38.635 33 41.5 30.314 41.5 27C41.5 23.686 38.635 21 35.1 21H28.5Z"
+    fill="url(#pulpayFavGrad)"
+  />
+  <!-- Onda de Pulso (ECG / Pulse Wave) -->
+  <path
+    d="M5 32H12.5L15.5 23L19.5 41L23.5 28L26.5 33.5H38.5L42 25.5L45.5 39.5L49.5 20.5L53 36L55.5 32H59"
+    stroke="url(#pulpayFavGrad)"
+    stroke-width="3.4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
