@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/config.js",
+      "destination": "/api/index.js"
+    },
+    {
+      "source": "/api/config",
+      "destination": "/api/index.js"
+    },
+    {
+      "source": "/health",
+      "destination": "/api/index.js"
+    },
+    {
+      "source": "/((?!css/|js/|vendor/|favicon).*)",
+      "destination": "/api/index.js"
+    }
+  ]
+}

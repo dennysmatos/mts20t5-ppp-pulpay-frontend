@@ -22,14 +22,23 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Disponibiliza o Bulma CSS localmente a partir de node_modules
-app.use(
-  '/vendor/bulma',
-  express.static(path.resolve(__dirname, '../node_modules/bulma/css'))
+// Arquivos estáticos públicos (CSS, JS, HTML e vendor/bulma)
+const publicDir = path.resolve(__dirname, '../public');
+const bulmaStaticFile = path.join(publicDir, 'vendor/bulma/bulma.min.css');
+const bulmaNodeModulesFile = path.resolve(
+  __dirname,
+  '../node_modules/bulma/css/bulma.min.css'
 );
 
-// Arquivos estáticos públicos (CSS, JS, HTML)
-const publicDir = path.resolve(__dirname, '../public');
+app.get('/vendor/bulma/bulma.min.css', (_req, res) => {
+  const target = fs.existsSync(bulmaStaticFile)
+    ? bulmaStaticFile
+    : bulmaNodeModulesFile;
+  const css = fs.readFileSync(target, 'utf-8');
+  res.setHeader('Content-Type', 'text/css; charset=utf-8');
+  res.status(200).send(css);
+});
+
 app.use(express.static(publicDir, { index: false }));
 
 // Endpoint de configuração dinâmica do ambiente (RN-FE: Configuração de Ambiente Desacoplada)
