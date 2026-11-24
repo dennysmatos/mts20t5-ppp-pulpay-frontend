@@ -101,10 +101,33 @@ html[data-theme="dark"] body {
 
 .navbar.is-pulsar .navbar-brand .navbar-item,
 .navbar.is-pulsar .navbar-menu .navbar-item {
-  color: rgba(248, 250, 252, 0.9);
+  color: rgba(248, 250, 252, 0.92) !important;
+  background-color: transparent !important;
   font-weight: 500;
   position: relative;
   transition: color 0.2s var(--pulsar-ease), background-color 0.2s var(--pulsar-ease), transform 0.2s var(--pulsar-ease);
+}
+
+.navbar.is-pulsar .navbar-brand > a.navbar-item:hover,
+.navbar.is-pulsar .navbar-brand > a.navbar-item:focus,
+.navbar.is-pulsar .navbar-brand > a.navbar-item:active,
+.navbar.is-pulsar .navbar-brand > a.navbar-item.is-active {
+  background-color: rgba(14, 165, 233, 0.1) !important;
+  color: #ffffff !important;
+  border-radius: 10px;
+}
+
+/* Garante que o menu mobile/desktop na navbar escura nunca fique com fundo branco no Light Theme */
+.navbar.is-pulsar .navbar-menu {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+@media screen and (max-width: 1023px) {
+  .navbar.is-pulsar .navbar-menu.is-active {
+    background: linear-gradient(135deg, rgba(7, 16, 36, 0.98) 0%, rgba(13, 25, 48, 0.98) 100%) !important;
+    border-bottom: 1px solid rgba(16, 245, 122, 0.25);
+  }
 }
 
 /* Logotipo & Ícone do App PulPay (P + Onda de Pulso) */
@@ -158,7 +181,11 @@ html[data-theme="dark"] body {
   font-size: 1.2rem;
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: #ffffff;
+  color: #ffffff !important;
+}
+
+.pulpay-title-main strong {
+  color: #ffffff !important;
 }
 
 .pulpay-title-main .pulpay-title-accent {
@@ -170,13 +197,13 @@ html[data-theme="dark"] body {
 
 .pulpay-subtitle-tag {
   font-size: 0.72rem;
-  color: #94a3b8;
+  color: #94a3b8 !important;
   letter-spacing: 0.02em;
   font-weight: 400;
 }
 
 .pulpay-subtitle-tag strong {
-  color: #e2e8f0;
+  color: #e2e8f0 !important;
   font-weight: 700;
 }
 
@@ -198,9 +225,10 @@ html[data-theme="dark"] body {
   transition: width 0.25s var(--pulsar-ease);
 }
 
-.navbar.is-pulsar .navbar-menu .navbar-start .navbar-item:hover {
-  background-color: rgba(14, 165, 233, 0.14);
-  color: #ffffff;
+.navbar.is-pulsar .navbar-menu .navbar-start .navbar-item:hover,
+.navbar.is-pulsar .navbar-menu .navbar-start .navbar-item:focus {
+  background-color: rgba(14, 165, 233, 0.14) !important;
+  color: #ffffff !important;
   transform: translateY(-1px);
 }
 
@@ -210,8 +238,8 @@ html[data-theme="dark"] body {
 }
 
 .navbar.is-pulsar .navbar-menu .navbar-start .navbar-item.is-active {
-  background-color: rgba(16, 245, 122, 0.12);
-  color: #10f57a;
+  background-color: rgba(16, 245, 122, 0.12) !important;
+  color: #10f57a !important;
   font-weight: 600;
 }
 
@@ -297,13 +325,17 @@ html[data-theme="dark"] body {
 
 .auth-wordmark-pulsar strong {
   font-weight: 800;
-  color: #ffffff;
+  color: #ffffff !important;
 }
 
 .auth-wordmark-pulpay {
   font-size: 1.05rem;
   font-weight: 800;
-  color: #ffffff;
+  color: #ffffff !important;
+}
+
+.auth-wordmark-pulpay strong {
+  color: #ffffff !important;
 }
 
 .auth-wordmark-pulpay span {
