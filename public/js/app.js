@@ -202,7 +202,11 @@ function updateNavbarState(activePath) {
     merchantInfo?.classList.remove('is-hidden');
     guestLinks?.classList.add('is-hidden');
     if (merchantNameEl && merchant) {
-      merchantNameEl.textContent = `${merchant.name} (${merchant.email})`;
+      merchantNameEl.textContent = merchant.name || 'Lojista';
+      merchantNameEl.setAttribute(
+        'title',
+        merchant.email ? `${merchant.name} (${merchant.email})` : merchant.name
+      );
     }
   } else {
     authLinks?.classList.add('is-hidden');
