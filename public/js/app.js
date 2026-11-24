@@ -1701,10 +1701,23 @@ function bindGlobalEvents() {
 
   mobileBackdrop?.addEventListener('click', closeMobileMenu);
 
-  // Fecha o drawer mobile automaticamente ao clicar em qualquer rota [data-nav] ou no botão Sair
+  // Fecha o drawer mobile automaticamente ao clicar em qualquer rota [data-nav], link Quem Somos ou botão Sair
   document.body.addEventListener('click', (event) => {
-    if (event.target.closest('[data-nav]') || event.target.closest('#btn-logout')) {
+    if (
+      event.target.closest('[data-nav]') ||
+      event.target.closest('#btn-logout') ||
+      event.target.closest('#nav-about-link')
+    ) {
       closeMobileMenu();
+    }
+  });
+
+  // Rolagem suave para a seção estática Quem Somos (#quem-somos)
+  $('nav-about-link')?.addEventListener('click', (event) => {
+    event.preventDefault();
+    const aboutSection = $('quem-somos');
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
 

@@ -322,6 +322,10 @@ describe('Servidor Express Web Frontend & Seletores QA (data-testid)', () => {
       assert.ok(html.includes('data-testid="btn-theme-toggle"'), 'Deve conter botão de alternância Dark/Light Theme');
       assert.ok(html.includes('pulpay-logo-svg'), 'Deve conter o logotipo vetorial PulPay com onda de pulso');
       assert.ok(html.includes('PulPay'), 'Deve conter a tipografia PulPay do brandbook');
+      assert.ok(html.includes('Quem Somos'), 'Deve conter a seção estática Quem Somos');
+      assert.ok(html.includes('Projeto de Portfólio Pessoal - Turma 5'), 'Deve conter a identificação Projeto de Portfólio Pessoal - Turma 5');
+      assert.ok(html.includes('By Dennys Matos'), 'Deve conter a autoria By Dennys Matos');
+      assert.ok(html.includes('/media/video_pulpay.mp4'), 'Deve referenciar o vídeo institucional do PulPay');
 
       const requiredTestIds = [
         'input-name',

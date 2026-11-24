@@ -60,6 +60,11 @@
         </div>
 
         <div class="navbar-end">
+          <!-- Link Público/Privado para a Seção Quem Somos -->
+          <a class="navbar-item" href="#quem-somos" id="nav-about-link" data-testid="nav-about">
+            Quem Somos
+          </a>
+
           <!-- Botão Minimalista de Alternância de Tema (Apenas Símbolo: ☀️ / 🌙) -->
           <div class="navbar-item">
             <button type="button" id="btn-theme-toggle" class="button is-small is-theme-toggle"
@@ -884,6 +889,109 @@
           </div>
 
           <div id="webhooks-list-container"></div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SEÇÃO ESTÁTICA: QUEM SOMOS (Contexto Didático Mentoria 2.0 + Vídeo) -->
+      <!-- =================================================================== -->
+      <section id="quem-somos" class="about-section mt-6 pt-5" aria-label="Quem Somos e Contexto Didático" data-testid="section-about">
+        <div class="pulsar-panel about-hero-panel">
+          <!-- Badges de Identificação Acadêmica & Portfólio -->
+          <div class="is-flex is-flex-wrap-wrap is-justify-content-space-between is-align-items-center mb-4" style="gap: 0.75rem;">
+            <div class="tags has-addons mb-0">
+              <span class="tag is-dark is-medium has-text-weight-bold">Mentoria 2.0 • Júlio de Lima</span>
+              <span class="tag is-status-paid is-medium" data-testid="about-portfolio-badge">Projeto de Portfólio Pessoal - Turma 5</span>
+            </div>
+            <span class="tag is-about-author-badge is-medium" data-testid="about-author-badge">
+              ✨ By Dennys Matos
+            </span>
+          </div>
+
+          <div class="columns is-variable is-6 is-vcentered">
+            <!-- Coluna de Conteúdo Didático e Arquitetural -->
+            <div class="column is-6">
+              <div class="is-flex is-align-items-center mb-3" style="gap: 0.75rem;">
+                <span class="pulsar-logo-badge" aria-hidden="true">
+                  <img src="/favicon.svg" alt="" class="pulpay-logo-svg" />
+                </span>
+                <div>
+                  <h2 class="title is-3 mb-0">Quem Somos — <span class="pulpay-gradient-text">PulPay</span></h2>
+                  <p class="is-size-7 has-text-grey"><strong>pulsar</strong> payments • Hub de Pagamentos, Carteiras BRL &amp; Webhooks</p>
+                </div>
+              </div>
+
+              <p class="mb-3 is-size-6 about-lead-text">
+                O <strong>PulPay (Pulsar Payments)</strong> é uma plataforma fintech concebida com finalidade didática e prática como <strong>Projeto de Portfólio Pessoal - Turma 5</strong> da <strong>Mentoria 2.0 do Júlio de Lima</strong>.
+              </p>
+
+              <p class="mb-4 is-size-7 has-text-grey">
+                A aplicação foi projetada aplicando os pilares de <strong>Design for Testability (Padrão QA 2.0)</strong>, Engenharia de Qualidade de Software e Arquitetura em Camadas. Seu objetivo é oferecer um ecossistema realista e determinístico para o estudo e a automação de testes <em>End-to-End (E2E)</em>, testes de contrato OpenAPI 3.0, testes unitários e validação de segurança criptográfica.
+              </p>
+
+              <!-- Pilares Didáticos em Mini-Cards -->
+              <div class="columns is-multiline is-variable is-2 mb-4">
+                <div class="column is-6">
+                  <div class="about-feature-box">
+                    <p class="has-text-weight-bold is-size-7 mb-1">💳 Carteiras BRL &amp; Regras Financeiras</p>
+                    <p class="is-size-7 has-text-grey">Isolamento multi-tenant por lojista e trava determinística contra saldo negativo (<code>422 Unprocessable Entity</code>).</p>
+                  </div>
+                </div>
+                <div class="column is-6">
+                  <div class="about-feature-box">
+                    <p class="has-text-weight-bold is-size-7 mb-1">🔁 Idempotência &amp; Máquina de Estados</p>
+                    <p class="is-size-7 has-text-grey">Proteção contra duplicidade financeira via <code>Idempotency-Key</code> e transições controladas de estorno (<code>REFUNDED</code>).</p>
+                  </div>
+                </div>
+                <div class="column is-6">
+                  <div class="about-feature-box">
+                    <p class="has-text-weight-bold is-size-7 mb-1">🔐 Webhooks &amp; Criptografia HMAC</p>
+                    <p class="is-size-7 has-text-grey">Simulador interativo de eventos assinados com <code>HMAC SHA-256</code> no cabeçalho <code>X-Signature</code>.</p>
+                  </div>
+                </div>
+                <div class="column is-6">
+                  <div class="about-feature-box">
+                    <p class="has-text-weight-bold is-size-7 mb-1">🧪 Seletores Resilientes para QA</p>
+                    <p class="is-size-7 has-text-grey">Mapeamento completo com atributos <code>data-testid</code> e semântica ARIA para Cypress, Playwright e Selenium.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Coluna de Vídeo Institucional / Demonstrativo PulPay -->
+            <div class="column is-6">
+              <div class="about-video-wrapper" data-testid="about-video-container">
+                <div class="about-video-header">
+                  <span class="about-video-dots">
+                    <span></span><span></span><span></span>
+                  </span>
+                  <span class="is-size-7 is-monospace has-text-grey">pulpay-showcase.mp4</span>
+                </div>
+                <video
+                  id="pulpay-about-video"
+                  class="about-video-player"
+                  controls
+                  preload="metadata"
+                  playsinline
+                  poster="/favicon.svg"
+                  data-testid="about-video-player"
+                >
+                  <source src="/media/video_pulpay.mp4" type="video/mp4" />
+                  Seu navegador não suporta a reprodução de vídeo HTML5.
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <!-- Rodapé de Assinatura da Seção Quem Somos -->
+          <div class="about-footer-bar mt-4 pt-3">
+            <span class="is-size-7 has-text-grey">
+              <strong>Projeto de Portfólio Pessoal - Turma 5</strong> • Mentoria 2.0 (Júlio de Lima)
+            </span>
+            <span class="is-size-7 has-text-weight-bold pulpay-gradient-text">
+              By Dennys Matos
+            </span>
+          </div>
         </div>
       </section>
     </div>

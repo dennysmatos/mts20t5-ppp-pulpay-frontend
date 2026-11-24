@@ -14,7 +14,7 @@
       "destination": "/api/index.js"
     },
     {
-      "source": "/((?!css/|js/|vendor/|favicon).*)",
+      "source": "/((?!css/|js/|vendor/|media/|favicon).*)",
       "destination": "/api/index.js"
     }
   ]

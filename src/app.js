@@ -110,7 +110,8 @@ const appRoutes = [
   '/dashboard',
   '/accounts',
   '/transactions',
-  '/webhooks'
+  '/webhooks',
+  '/about'
 ];
 
 app.get(appRoutes, serveIndexHtml);
