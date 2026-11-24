@@ -962,16 +962,44 @@
             <div class="column is-6">
               <div class="about-video-wrapper" data-testid="about-video-container">
                 <div class="about-video-header">
-                  <span class="about-video-dots">
-                    <span></span><span></span><span></span>
-                  </span>
-                  <span class="is-size-7 is-monospace has-text-grey">pulpay-showcase.mp4</span>
+                  <div class="is-flex is-align-items-center" style="gap: 0.6rem;">
+                    <span class="about-video-dots">
+                      <span></span><span></span><span></span>
+                    </span>
+                    <span class="is-size-7 is-monospace has-text-grey">pulpay-showcase.mp4</span>
+                  </div>
+                  <!-- Controles Dedicados de Reprodução (Play/Pause e Mute/Unmute) -->
+                  <div class="about-video-controls">
+                    <button
+                      type="button"
+                      id="btn-video-play-toggle"
+                      class="button is-small is-video-ctrl"
+                      title="Pausar ou retomar reprodução do vídeo"
+                      aria-label="Pausar reprodução do vídeo"
+                      data-testid="btn-video-play-toggle"
+                    >
+                      ⏸️ Pausar
+                    </button>
+                    <button
+                      type="button"
+                      id="btn-video-mute-toggle"
+                      class="button is-small is-video-ctrl"
+                      title="Ativar ou silenciar áudio do vídeo"
+                      aria-label="Ativar áudio do vídeo"
+                      data-testid="btn-video-mute-toggle"
+                    >
+                      🔇 Som
+                    </button>
+                  </div>
                 </div>
                 <video
                   id="pulpay-about-video"
                   class="about-video-player"
+                  autoplay
+                  loop
+                  muted
                   controls
-                  preload="metadata"
+                  preload="auto"
                   playsinline
                   poster="/favicon.svg"
                   data-testid="about-video-player"

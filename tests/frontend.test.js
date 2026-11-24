@@ -326,6 +326,10 @@ describe('Servidor Express Web Frontend & Seletores QA (data-testid)', () => {
       assert.ok(html.includes('Projeto de Portfólio Pessoal - Turma 5'), 'Deve conter a identificação Projeto de Portfólio Pessoal - Turma 5');
       assert.ok(html.includes('By Dennys Matos'), 'Deve conter a autoria By Dennys Matos');
       assert.ok(html.includes('/media/video_pulpay.mp4'), 'Deve referenciar o vídeo institucional do PulPay');
+      assert.ok(html.includes('autoplay'), 'O vídeo deve possuir reprodução automática (autoplay)');
+      assert.ok(html.includes('loop'), 'O vídeo deve possuir reprodução infinita (loop)');
+      assert.ok(html.includes('data-testid="btn-video-play-toggle"'), 'Deve conter botão para interromper/retomar reprodução');
+      assert.ok(html.includes('data-testid="btn-video-mute-toggle"'), 'Deve conter botão para mutar/ativar som');
 
       const requiredTestIds = [
         'input-name',

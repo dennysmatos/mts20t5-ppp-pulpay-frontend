@@ -1721,6 +1721,61 @@ function bindGlobalEvents() {
     }
   });
 
+  // Controles de Reprodução Infinita (Loop), Pausar/Reproduzir e Mutar/Desmutar do Vídeo Quem Somos
+  const aboutVideo = $('pulpay-about-video');
+  const btnVideoPlay = $('btn-video-play-toggle');
+  const btnVideoMute = $('btn-video-mute-toggle');
+
+  const syncVideoControlsState = () => {
+    if (!aboutVideo) return;
+    if (btnVideoPlay) {
+      const isPaused = aboutVideo.paused;
+      btnVideoPlay.innerHTML = isPaused ? '▶️ Reproduzir' : '⏸️ Pausar';
+      btnVideoPlay.setAttribute(
+        'aria-label',
+        isPaused ? 'Retomar reprodução do vídeo' : 'Interromper reprodução do vídeo'
+      );
+    }
+    if (btnVideoMute) {
+      const isMuted = aboutVideo.muted;
+      btnVideoMute.innerHTML = isMuted ? '🔇 Ativar Som' : '🔊 Mutar';
+      btnVideoMute.setAttribute(
+        'aria-label',
+        isMuted ? 'Ativar áudio do vídeo' : 'Silenciar áudio do vídeo'
+      );
+    }
+  };
+
+  if (aboutVideo) {
+    aboutVideo.loop = true;
+    aboutVideo.muted = true;
+    aboutVideo.play().catch(() => {
+      // Caso o navegador aguarde interação inicial, sincroniza estado do botão
+      syncVideoControlsState();
+    });
+
+    aboutVideo.addEventListener('play', syncVideoControlsState);
+    aboutVideo.addEventListener('pause', syncVideoControlsState);
+    aboutVideo.addEventListener('volumechange', syncVideoControlsState);
+    syncVideoControlsState();
+  }
+
+  btnVideoPlay?.addEventListener('click', () => {
+    if (!aboutVideo) return;
+    if (aboutVideo.paused) {
+      aboutVideo.play();
+    } else {
+      aboutVideo.pause();
+    }
+    syncVideoControlsState();
+  });
+
+  btnVideoMute?.addEventListener('click', () => {
+    if (!aboutVideo) return;
+    aboutVideo.muted = !aboutVideo.muted;
+    syncVideoControlsState();
+  });
+
   // Alternância de Tema (Light / Dark Mode)
   $('btn-theme-toggle')?.addEventListener('click', toggleTheme);
 

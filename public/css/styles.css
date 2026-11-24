@@ -1149,9 +1149,34 @@ html[data-theme="light"] .tag.is-about-author-badge {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.55rem 0.9rem;
+  padding: 0.5rem 0.85rem;
   background: rgba(15, 27, 49, 0.95);
   border-bottom: 1px solid rgba(14, 165, 233, 0.22);
+  gap: 0.5rem;
+}
+
+.about-video-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.button.is-video-ctrl {
+  background: rgba(14, 165, 233, 0.14) !important;
+  color: #e2e8f0 !important;
+  border: 1px solid rgba(14, 165, 233, 0.38) !important;
+  border-radius: 7px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  height: 1.85rem;
+  padding: 0 0.65rem;
+}
+
+.button.is-video-ctrl:hover {
+  background: rgba(16, 245, 122, 0.18) !important;
+  color: #10f57a !important;
+  border-color: #10f57a !important;
+  box-shadow: 0 0 12px rgba(16, 245, 122, 0.25) !important;
 }
 
 .about-video-dots {
