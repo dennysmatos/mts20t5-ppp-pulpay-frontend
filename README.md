@@ -60,12 +60,14 @@ ppp-pulpay-frontend/
 
 ```mermaid
 flowchart LR
-    Browser["Navegador / Cypress / Playwright\n(http://localhost:4000)"]
-    ExpressFE["Servidor Express Frontend\n(Porta 4000)"]
-    BackendAPI["Pulsar Payments API Backend\n(http://localhost:3000)"]
+    Browser["Navegador / Cypress / Playwright\n(localhost:4000 ou pulpay.qatec.com.br)"]
+    ExpressFE["Servidor Express Frontend\n(Porta 4000 / Vercel)"]
+    BackendAPI["Pulsar Payments API Backend\n(localhost:3000 ou pulpay-backend.vercel.app)"]
+    AivenPG[("PostgreSQL Cloud\n(Aiven.io - SSL/TLS)")]
 
     Browser -- "GET /login, /dashboard, /accounts...\nGET /config.js (VITE_API_BASE_URL)" --> ExpressFE
     Browser -- "Fetch JSON + Authorization: Bearer <JWT>\n+ Idempotency-Key" --> BackendAPI
+    BackendAPI -- "Pool pg (TLS / PG_CA_CERT)" --> AivenPG
 ```
 
 ---
@@ -145,7 +147,8 @@ Para facilitar a escrita de testes automatizados com **Cypress**, **Playwright**
 1. **Barra Superior Fixa (`is-fixed-top`) com Glassmorphism:** Mantém a navegação, identificação do lojista e alternador de tema sempre acessíveis durante a rolagem de extratos e logs extensos.
 2. **Dark Theme & Light Theme com Persistência:** Suporte completo ao atributo `data-theme="dark"` do Bulma v1 combinado com variáveis CSS semânticas, respeitando a preferência do sistema operacional (`prefers-color-scheme: dark`) e salvando a escolha do usuário no `localStorage`.
 3. **Micro-interações CSS de Alta Performance:** Efeitos de hover utilizam exclusivamente propriedades aceleradas por GPU (`transform: translateY(...)` e `box-shadow`) e respeitam usuários com restrição de movimento via `@media (prefers-reduced-motion: reduce)`.
-4. **Segurança Frontend & HTTP:**
+4. **Segurança Frontend, Isolamento de Dados Sensíveis & HTTP:**
+   - **Zero Credenciais de Banco no Frontend:** O Frontend nunca armazena nem expõe credenciais do PostgreSQL (Aiven Cloud), certificados `PG_CA_CERT`, `DATABASE_URL` ou `JWT_SECRET`. Toda persistência ocorre exclusivamente através da API Backend (`VITE_API_BASE_URL`), onde as variáveis sensíveis permanecem criptografadas no ambiente servidor.
    - Prevenção contra **DOM XSS** com sanitização via `escapeHtml` em todos os dados dinâmicos renderizados.
    - Headers HTTP de segurança configurados no Express (`X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin` e ocultação do header `X-Powered-By`).
 
@@ -183,8 +186,14 @@ Sugestões de cenários de teste E2E para execução integrada (Frontend porta `
    ```
    Variáveis disponíveis:
    ```env
+   # Execução Local
    PORT=4000
    VITE_API_BASE_URL=http://localhost:3000
+   API_BASE_URL=http://localhost:3000
+
+   # Execução em Produção (Vercel conectada ao Backend + PostgreSQL Aiven.io)
+   # VITE_API_BASE_URL=https://pulpay-backend.vercel.app
+   # API_BASE_URL=https://pulpay-backend.vercel.app
    ```
 
 3. Inicie o servidor Web na porta **4000**:

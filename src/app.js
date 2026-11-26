@@ -50,11 +50,15 @@ app.get('/vendor/bulma/bulma.min.css', (_req, res) => {
 app.use(express.static(publicDir, { index: false }));
 
 // Endpoint de configuração dinâmica do ambiente (RN-FE: Configuração de Ambiente Desacoplada)
+const resolveApiBaseUrl = () => {
+  if (process.env.VITE_API_BASE_URL) return process.env.VITE_API_BASE_URL;
+  if (process.env.API_BASE_URL) return process.env.API_BASE_URL;
+  if (process.env.VERCEL) return 'https://pulpay-backend.vercel.app';
+  return 'http://localhost:3000';
+};
+
 app.get('/config.js', (_req, res) => {
-  const apiBaseUrl =
-    process.env.VITE_API_BASE_URL ||
-    process.env.API_BASE_URL ||
-    'http://localhost:3000';
+  const apiBaseUrl = resolveApiBaseUrl();
 
   res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
   res.setHeader('Cache-Control', 'no-store');
@@ -68,10 +72,7 @@ app.get('/config.js', (_req, res) => {
 
 // Endpoint JSON opcional para inspeção da configuração
 app.get('/api/config', (_req, res) => {
-  const apiBaseUrl =
-    process.env.VITE_API_BASE_URL ||
-    process.env.API_BASE_URL ||
-    'http://localhost:3000';
+  const apiBaseUrl = resolveApiBaseUrl();
 
   res.status(200).json({
     VITE_API_BASE_URL: apiBaseUrl,
@@ -81,10 +82,7 @@ app.get('/api/config', (_req, res) => {
 
 // Healthcheck da aplicação Web Frontend
 app.get('/health', (_req, res) => {
-  const apiBaseUrl =
-    process.env.VITE_API_BASE_URL ||
-    process.env.API_BASE_URL ||
-    'http://localhost:3000';
+  const apiBaseUrl = resolveApiBaseUrl();
 
   res.status(200).json({
     status: 'ok',
