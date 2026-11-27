@@ -5,7 +5,7 @@
 
 Este documento apresenta a especificação formal dos **Casos de Teste** da aplicação Web **PulPay (`pulsar payments`)**, estruturada em conformidade com a norma internacional **ISO/IEC/IEEE 29119-3 (*Software and systems engineering — Software testing — Part 3: Test documentation*)**.
 
-Os casos de teste abaixo cobrem as Regras de Negócio do Frontend (`RN-FE-01` a `RN-FE-12`), as Regras Financeiras do Backend (`RN01` a `RN05`) e os Requisitos Funcionais (`RF01` a `RF04`), aplicando técnicas de **Particionamento de Equivalência**, **Análise de Valor Limite (BVA)**, **Transição de Estados** e **Testes de Idempotência e Segurança HMAC**.
+Os casos de teste abaixo cobrem as Regras de Negócio do Frontend (`RN-FE-01` a `RN-FE-12`), as Regras Financeiras do Backend (`RN01` a `RN05`) e os Requisitos Funcionais (`RF01` a `RF04`), aplicando técnicas de **Particionamento de Equivalência**, **Análise de Valor Limite (BVA)**, **Transição de Estados** e **Testes de Idempotência e Segurança HMAC**. Para consultar os defeitos reportados a partir da execução destes casos e das sessões exploratórias, acesse **[Gestão de Defeitos (ISO-29119-3 & Issues)](Gestao-de-Defeitos-ISO-29119-3)**.
 
 ---
 
@@ -107,6 +107,17 @@ Os casos de teste abaixo cobrem as Regras de Negócio do Frontend (`RN-FE-01` a 
     </tr>
   </tbody>
 </table>
+
+---
+
+## Rastreabilidade com Defeitos Registrados (GitHub Issues)
+
+Durante a execução dos Casos de Teste e das Sessões Exploratórias ([Relatório de Sessão - Test Charter SBTM](Relatorio-de-Sessao-Test-Charter)), foram identificados e registrados 4 defeitos na aba **[Issues do GitHub](https://github.com/dennysmatos/mts20t5-ppp-pulpay-frontend/issues)**, documentados em detalhes na página **[Gestão de Defeitos (ISO/IEC/IEEE 29119-3)](Gestao-de-Defeitos-ISO-29119-3)**:
+
+- **[DEF-01 (Issue #5)](https://github.com/dennysmatos/mts20t5-ppp-pulpay-frontend/issues/5)** — Vinculado ao `CT-08` e `SBTM-S01`
+- **[DEF-02 (Issue #6)](https://github.com/dennysmatos/mts20t5-ppp-pulpay-frontend/issues/6)** — Vinculado aos `CT-08`, `CT-12` e `SBTM-S01`
+- **[DEF-03 (Issue #7)](https://github.com/dennysmatos/mts20t5-ppp-pulpay-frontend/issues/7)** — Vinculado ao `CT-13` e `SBTM-S02`
+- **[DEF-04 (Issue #8)](https://github.com/dennysmatos/mts20t5-ppp-pulpay-frontend/issues/8)** — Vinculado ao `CT-14` e `SBTM-S02`
 
 ---
 

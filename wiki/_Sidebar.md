@@ -7,6 +7,7 @@
 * **[Guia de Testabilidade QA e E2E](Guia-de-Testabilidade-QA-e-E2E)**
 * **[Casos de Teste (ISO/IEC/IEEE 29119-3)](Casos-de-Teste-ISO-29119-3)**
 * **[Relatório de Sessão (Test Charter - SBTM)](Relatorio-de-Sessao-Test-Charter)**
+* **[Gestão de Defeitos (ISO-29119-3 & Issues)](Gestao-de-Defeitos-ISO-29119-3)**
 * **[Design System e Identidade Visual](Design-System-e-Identidade-Visual)**
 * **[Instalação, Execução e Deploy](Instalacao-Execucao-e-Deploy)**
 

@@ -42,8 +42,8 @@ Para descobrir se o software lida bem com situações onde o lojista tenta movim
 *(\*) Podem ser (I)nformações ou (R)iscos.*
 
 ### Defeitos
-- No campo de valor da transação, ao tentar enviar um valor negativo como -10.00, o texto de ajuda em vermelho aparece abaixo do campo, mas a requisição HTTP ainda assim é disparada para o backend em vez de ser interrompida na validação local do formulário.
-- Na tabela de extrato, quando uma transação é filtrada por um status específico e um novo lançamento é feito com outro status, a lista recarrega mantendo o filtro ativo e o usuário não vê a transação que acabou de criar na tabela.
+- **[DEF-01 / Issue #1](https://github.com/dennysmatos/mts20t5-ppp-pulpay-frontend/issues/1)** ([Gestão de Defeitos](Gestao-de-Defeitos-ISO-29119-3)): No campo de valor da transação, ao tentar enviar um valor negativo como -10.00, o texto de ajuda em vermelho aparece abaixo do campo, mas a requisição HTTP ainda assim é disparada para o backend em vez de ser interrompida na validação local do formulário.
+- **[DEF-02 / Issue #2](https://github.com/dennysmatos/mts20t5-ppp-pulpay-frontend/issues/2)** ([Gestão de Defeitos](Gestao-de-Defeitos-ISO-29119-3)): Na tabela de extrato, quando uma transação é filtrada por um status específico e um novo lançamento é feito com outro status, a lista recarrega mantendo o filtro ativo e o usuário não vê a transação que acabou de criar na tabela.
 
 ### Perguntas
 - Quando uma requisição repetida chega com a mesma chave de idempotência, mas com valor ou tipo de operação diferentes da transação original, o sistema deveria retornar a transação antiga (200 OK) ou rejeitar com erro de conflito (409/422)?
@@ -88,8 +88,8 @@ Para descobrir se a interface trata adequadamente moedas não suportadas, nomes 
 *(\*) Podem ser (I)nformações ou (R)iscos.*
 
 ### Defeitos
-- No cadastro de webhook, quando o usuário desmarca todos os checkboxes de eventos na tela e clica em Salvar Webhook, o formulário não exibe erro de campo obrigatório e acaba salvando o webhook com todos os eventos marcados por conta do comportamento padrão da API.
-- Ao clicar no botão Copiar do segredo HMAC com o campo de segredo vazio, o sistema copia o segredo padrão da plataforma para a área de transferência, expondo qual é a chave padrão utilizada pelo servidor.
+- **[DEF-03 / Issue #3](https://github.com/dennysmatos/mts20t5-ppp-pulpay-frontend/issues/3)** ([Gestão de Defeitos](Gestao-de-Defeitos-ISO-29119-3)): No cadastro de webhook, quando o usuário desmarca todos os checkboxes de eventos na tela e clica em Salvar Webhook, o formulário não exibe erro de campo obrigatório e acaba salvando o webhook com todos os eventos marcados por conta do comportamento padrão da API.
+- **[DEF-04 / Issue #4](https://github.com/dennysmatos/mts20t5-ppp-pulpay-frontend/issues/4)** ([Gestão de Defeitos](Gestao-de-Defeitos-ISO-29119-3)): Ao clicar no botão Copiar do segredo HMAC com o campo de segredo vazio, o sistema copia o segredo padrão da plataforma para a área de transferência, expondo qual é a chave padrão utilizada pelo servidor.
 
 ### Perguntas
 - Deveria ser permitido cadastrar mais de uma carteira com exatamente o mesmo nome para o mesmo lojista?
