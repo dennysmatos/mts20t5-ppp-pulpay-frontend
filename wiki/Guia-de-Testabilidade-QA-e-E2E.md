@@ -87,3 +87,12 @@ O **PulPay (`ppp-pulpay-frontend`)** foi construído aplicando **Design for Test
    - Validar na UI que transações criadas como `PENDING` ou `FAILED` mantêm o botão `[data-testid="btn-refund-<id>"]` desabilitado (`disabled`), enquanto transações `PAID` habilitam o botão e, após o estorno, transitam para `REFUNDED` e desabilitam novo estorno.
 4. **Teste de Replay Idempotente:**
    - Marcar `[data-testid="checkbox-keep-idempotency"]`, enviar uma transação (`201 Created`) e clicar novamente em `[data-testid="btn-create-transaction"]`. Verificar que `[data-testid="banner-idempotent-replay"]` fica visível e que o saldo em `[data-testid="account-balance-value"]` não sofreu alteração duplicada.
+
+---
+
+## 3. Especificação Formal de Casos de Teste (ISO/IEC/IEEE 29119-3)
+
+Para consultar os **14 Casos de Teste** detalhados passo a passo com Pré-Condições, Ações, Resultados Esperados, Pós-Condições e Matriz de Rastreabilidade seguindo a norma **ISO-29119-3**, acesse a página dedicada da Wiki:
+
+- **[Casos de Teste (ISO/IEC/IEEE 29119-3)](Casos-de-Teste-ISO-29119-3)**
+

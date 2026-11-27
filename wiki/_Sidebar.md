@@ -5,6 +5,7 @@
 * **[Arquitetura e Integração Full-Stack](Arquitetura-e-Integracao)**
 * **[Regras de Negócio e Contratos (`RN-FE`)](Regras-de-Negocio-e-Contratos)**
 * **[Guia de Testabilidade QA e E2E](Guia-de-Testabilidade-QA-e-E2E)**
+* **[Casos de Teste (ISO/IEC/IEEE 29119-3)](Casos-de-Teste-ISO-29119-3)**
 * **[Design System e Identidade Visual](Design-System-e-Identidade-Visual)**
 * **[Instalação, Execução e Deploy](Instalacao-Execucao-e-Deploy)**
 
