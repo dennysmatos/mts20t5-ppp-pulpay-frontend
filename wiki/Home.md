@@ -26,9 +26,11 @@ O **PulPay (`pulsar payments`)** é um ecossistema completo de **Hub de Pagament
    - Catálogo completo de seletores resilientes `data-testid`, semântica de acessibilidade (`role="alert"`, `aria-live`), Particionamento de Equivalência, Análise de Valor Limite (BVA), Teste de Transição de Estados e Replay Idempotente.
 4. **[Especificação de Casos de Teste (ISO/IEC/IEEE 29119-3)](Casos-de-Teste-ISO-29119-3)**
    - Catálogo com 14 Casos de Teste formais documentados no modelo tabelado da norma **ISO-29119-3** (ID, Título, Prioridade, Rastreabilidade, Pré-Condições, Passos/Ação/Resultados Esperados e Pós-Condições).
-5. **[Design System, Identidade Visual PulPay e UX](Design-System-e-Identidade-Visual)**
+5. **[Relatório de Sessão (Test Charter - SBTM)](Relatorio-de-Sessao-Test-Charter)**
+   - Relatórios de sessões de testes exploratórios baseados no artigo de Jon Bach sobre *Session-Based Test Management*, contendo Test Charter, Tamanho da Sessão, Notas de Informações `(I)` e Riscos `(R)`, Defeitos e Perguntas.
+6. **[Design System, Identidade Visual PulPay e UX](Design-System-e-Identidade-Visual)**
    - Brandbook oficial do **PulPay** (Azul Noturno, Roxo Cósmico, Azul Elétrico e Verde BRL), logotipo vetorial com onda de pulso, navbar fixa com *Glassmorphism*, *Floating Glass Mobile Drawer* e seção estática *"Quem Somos"* com vídeo demonstrativo em loop.
-6. **[Instalação, Execução Local, Testes e Deploy](Instalacao-Execucao-e-Deploy)**
+7. **[Instalação, Execução Local, Testes e Deploy](Instalacao-Execucao-e-Deploy)**
    - Passo a passo para rodar o ecossistema localmente, executar as suítes de testes automatizados (`> 96%` de cobertura) e publicar o conteúdo desta pasta `wiki/` na aba **Wiki** do GitHub.
 
 ---
