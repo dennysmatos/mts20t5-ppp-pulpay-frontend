@@ -841,7 +841,37 @@ html[data-theme="dark"] .select select {
   box-shadow: 0 0 0 3px rgba(16, 245, 122, 0.2) !important;
 }
 
-/* Tabelas interativas no hover */
+/* Tabelas interativas no hover e padronização de colunas/larguras */
+.table-container {
+  border-radius: 10px;
+  border: 1px solid var(--pulsar-border);
+  overflow-x: auto;
+}
+
+.table {
+  margin-bottom: 0 !important;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table th {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  white-space: nowrap;
+  padding: 0.75rem 0.85rem !important;
+  background-color: var(--pulsar-surface-alt);
+}
+
+.table td {
+  padding: 0.75rem 0.85rem !important;
+}
+
+.is-nowrap {
+  white-space: nowrap !important;
+}
+
 .table.is-hoverable tbody tr {
   transition: background-color 0.18s var(--pulsar-ease);
 }

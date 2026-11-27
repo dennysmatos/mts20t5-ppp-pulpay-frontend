@@ -8,11 +8,11 @@ A interface do **PulPay (`pulsar payments`)** foi projetada seguindo o Brandbook
 
 | Nome da Cor | Token CSS | Hexadecimal | Aplicação na Interface |
 | :--- | :--- | :---: | :--- |
-| **Azul Noturno** | `--pulpay-night-blue`<br>`--pulsar-bg` | `#071024`<br>`#081121` | Background principal no Modo Escuro (padrão de fábrica), barra de navegação fixa e fundo de blocos HMAC |
-| **Superfície Noturna** | `--pulsar-surface`<br>`--pulsar-surface-alt` | `#0F1B31`<br>`#162440` | Cards de carteiras, painéis de módulos, KPIs e caixas de filtro |
-| **Roxo Cósmico** | `--pulpay-cosmic-purple` | `#8B5CF6` | Início do gradiente principal da marca, botões de ação (`is-link`) e badges de status `REFUNDED` |
-| **Azul Elétrico** | `--pulpay-electric-blue` | `#0EA5E9` | Centro do gradiente da marca, bordas interativas em foco/hover e botões secundários |
-| **Verde BRL** | `--pulpay-brl-green` | `#10F57A` | Final do gradiente da marca, saldos em Real Brasileiro (`R$`), contornos *neon glow*, badges `PAID` e `ACTIVE` |
+| **Azul&nbsp;Noturno** | `--pulpay&#8209;night&#8209;blue`<br>`--pulsar&#8209;bg` | `#071024`<br>`#081121` | Background principal no Modo Escuro (padrão de fábrica), barra de navegação fixa e fundo de blocos HMAC |
+| **Superfície&nbsp;Noturna** | `--pulsar&#8209;surface`<br>`--pulsar&#8209;surface&#8209;alt` | `#0F1B31`<br>`#162440` | Cards de carteiras, painéis de módulos, KPIs e caixas de filtro |
+| **Roxo&nbsp;Cósmico** | `--pulpay&#8209;cosmic&#8209;purple` | `#8B5CF6` | Início do gradiente principal da marca, botões de ação (`is-link`) e badges de status `REFUNDED` |
+| **Azul&nbsp;Elétrico** | `--pulpay&#8209;electric&#8209;blue` | `#0EA5E9` | Centro do gradiente da marca, bordas interativas em foco/hover e botões secundários |
+| **Verde&nbsp;BRL** | `--pulpay&#8209;brl&#8209;green` | `#10F57A` | Final do gradiente da marca, saldos em Real Brasileiro (`R$`), contornos *neon glow*, badges `PAID` e `ACTIVE` |
 
 ---
 

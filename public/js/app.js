@@ -606,11 +606,11 @@ function renderDashboardMetrics() {
           <table class="table is-fullwidth is-hoverable is-size-7">
             <thead>
               <tr>
-                <th>Data/Hora</th>
-                <th>Tipo</th>
+                <th class="is-nowrap">Data/Hora</th>
+                <th class="is-nowrap">Tipo</th>
                 <th>Descrição</th>
-                <th>Status</th>
-                <th class="has-text-right">Valor</th>
+                <th class="is-nowrap">Status</th>
+                <th class="has-text-right is-nowrap">Valor</th>
               </tr>
             </thead>
             <tbody>
@@ -619,11 +619,11 @@ function renderDashboardMetrics() {
                   const formattedVal = formatTransactionSignedAmount(tx);
                   return `
                     <tr>
-                      <td>${formatDateTimeBR(tx.createdAt)}</td>
-                      <td><span class="is-monospace has-text-weight-semibold">${escapeHtml(tx.type)}</span></td>
+                      <td class="is-nowrap">${formatDateTimeBR(tx.createdAt)}</td>
+                      <td class="is-nowrap"><span class="tag is-light is-monospace has-text-weight-bold">${escapeHtml(tx.type)}</span></td>
                       <td>${escapeHtml(tx.description || '—')}</td>
-                      <td>${renderStatusBadgeHtml(tx)}</td>
-                      <td class="has-text-right ${formattedVal.cssClass}">${formattedVal.text}</td>
+                      <td class="is-nowrap">${renderStatusBadgeHtml(tx)}</td>
+                      <td class="has-text-right is-nowrap ${formattedVal.cssClass}">${formattedVal.text}</td>
                     </tr>
                   `;
                 })
@@ -1052,10 +1052,10 @@ function renderTransactionsTable() {
               return `
                 <tr data-testid="transaction-row-${escapeHtml(id)}">
                   <td class="is-nowrap">${formatDateTimeBR(tx.createdAt)}</td>
-                  <td>
+                  <td class="is-nowrap">
                     <span class="has-text-weight-semibold">${escapeHtml(accountName)}</span>
                   </td>
-                  <td>
+                  <td class="is-nowrap">
                     <span class="tag is-light is-monospace has-text-weight-bold">${escapeHtml(tx.type)}</span>
                   </td>
                   <td>
@@ -1067,11 +1067,11 @@ function renderTransactionsTable() {
                     }
                     ${refundDetailsHtml}
                   </td>
-                  <td>${renderStatusBadgeHtml(tx)}</td>
+                  <td class="is-nowrap">${renderStatusBadgeHtml(tx)}</td>
                   <td class="has-text-right is-nowrap ${amountInfo.cssClass}" data-testid="transaction-amount-${escapeHtml(id)}">
                     ${amountInfo.text}
                   </td>
-                  <td class="has-text-centered">
+                  <td class="has-text-centered is-nowrap">
                     ${refundButtonHtml}
                   </td>
                 </tr>
@@ -1422,14 +1422,14 @@ function renderWebhooksList() {
                       const sig = log.signature || '';
                       return `
                         <tr data-testid="delivery-log-row-${escapeHtml(logId)}">
-                          <td class="is-monospace">${escapeHtml(logId)}</td>
-                          <td><span class="tag is-light is-monospace">${escapeHtml(log.event)}</span></td>
+                          <td class="is-monospace is-nowrap">${escapeHtml(logId)}</td>
+                          <td class="is-nowrap"><span class="tag is-light is-monospace">${escapeHtml(log.event)}</span></td>
                           <td class="is-monospace">
-                            <div class="is-flex is-align-items-center">
-                              <code class="mr-2" style="word-break: break-all;">${escapeHtml(sig)}</code>
+                            <div class="is-flex is-align-items-center" style="gap: 0.4rem;">
+                              <code style="word-break: break-all;">${escapeHtml(sig)}</code>
                               <button
                                 type="button"
-                                class="button is-small is-white btn-copy-log-sig"
+                                class="button is-small is-white is-nowrap btn-copy-log-sig"
                                 data-sig="${escapeHtml(sig)}"
                                 title="Copiar assinatura HMAC"
                                 data-testid="btn-copy-sig-${escapeHtml(logId)}"
@@ -1438,8 +1438,8 @@ function renderWebhooksList() {
                               </button>
                             </div>
                           </td>
-                          <td><span class="tag is-success is-light has-text-weight-bold">${escapeHtml(log.statusCode || 200)}</span></td>
-                          <td><span class="tag is-dark is-small">${escapeHtml(log.status || 'SIMULATED')}</span></td>
+                          <td class="is-nowrap"><span class="tag is-success is-light has-text-weight-bold">${escapeHtml(log.statusCode || 200)}</span></td>
+                          <td class="is-nowrap"><span class="tag is-dark is-small">${escapeHtml(log.status || 'SIMULATED')}</span></td>
                           <td class="is-nowrap">${formatDateTimeBR(log.attemptedAt)}</td>
                         </tr>
                       `;

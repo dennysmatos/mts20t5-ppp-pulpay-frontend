@@ -134,11 +134,11 @@ Para facilitar a escrita de testes automatizados com **Cypress**, **Playwright**
 
 | Módulo | Elementos e Atributos `data-testid` |
 | :--- | :--- |
-| **Navegação & Tema** | `nav-brand`, `nav-dashboard`, `nav-accounts`, `nav-transactions`, `nav-webhooks`, `btn-theme-toggle`, `merchant-header-info`, `btn-logout` |
-| **Autenticação (`/login`, `/register`)** | `tab-auth-login`, `tab-auth-register`, `input-name`, `input-email`, `input-document`, `input-password`, `btn-submit-auth`, `alert-error-message`, `alert-success-message` |
-| **Carteiras (`/accounts`)** | `btn-new-account`, `input-account-name`, `input-initial-balance`, `select-currency`, `account-card-<id>`, `account-balance-value`, `account-status-<id>`, `accounts-empty-state` |
-| **Transações (`/transactions`)** | `select-account`, `select-transaction-type`, `input-transaction-amount`, `select-transaction-status`, `input-transaction-description`, `input-idempotency-key`, `checkbox-keep-idempotency`, `btn-create-transaction`, `banner-idempotent-replay`, `btn-refund-<id>`, `badge-status-<id>`, `modal-refund`, `input-refund-reason`, `btn-confirm-refund` |
-| **Webhooks (`/webhooks`)** | `input-webhook-url`, `input-webhook-secret`, `btn-save-webhook`, `select-simulate-webhook-id`, `select-simulate-event`, `textarea-simulate-data`, `btn-simulate-webhook`, `code-hmac-signature`, `sim-target-url`, `sim-headers-pre`, `sim-payload-pre` |
+| **Navegação&nbsp;&&nbsp;Tema** | `nav&#8209;brand`, `nav&#8209;dashboard`, `nav&#8209;accounts`, `nav&#8209;transactions`, `nav&#8209;webhooks`, `btn&#8209;theme&#8209;toggle`, `merchant&#8209;header&#8209;info`, `btn&#8209;logout` |
+| **Autenticação (`/login`, `/register`)** | `tab&#8209;auth&#8209;login`, `tab&#8209;auth&#8209;register`, `input&#8209;name`, `input&#8209;email`, `input&#8209;document`, `input&#8209;password`, `btn&#8209;submit&#8209;auth`, `alert&#8209;error&#8209;message`, `alert&#8209;success&#8209;message` |
+| **Carteiras (`/accounts`)** | `btn&#8209;new&#8209;account`, `input&#8209;account&#8209;name`, `input&#8209;initial&#8209;balance`, `select&#8209;currency`, `account&#8209;card&#8209;<id>`, `account&#8209;balance&#8209;value`, `account&#8209;status&#8209;<id>`, `accounts&#8209;empty&#8209;state` |
+| **Transações (`/transactions`)** | `select&#8209;account`, `select&#8209;transaction&#8209;type`, `input&#8209;transaction&#8209;amount`, `select&#8209;transaction&#8209;status`, `input&#8209;transaction&#8209;description`, `input&#8209;idempotency&#8209;key`, `checkbox&#8209;keep&#8209;idempotency`, `btn&#8209;create&#8209;transaction`, `banner&#8209;idempotent&#8209;replay`, `btn&#8209;refund&#8209;<id>`, `badge&#8209;status&#8209;<id>`, `modal&#8209;refund`, `input&#8209;refund&#8209;reason`, `btn&#8209;confirm&#8209;refund` |
+| **Webhooks (`/webhooks`)** | `input&#8209;webhook&#8209;url`, `input&#8209;webhook&#8209;secret`, `btn&#8209;save&#8209;webhook`, `select&#8209;simulate&#8209;webhook&#8209;id`, `select&#8209;simulate&#8209;event`, `textarea&#8209;simulate&#8209;data`, `btn&#8209;simulate&#8209;webhook`, `code&#8209;hmac&#8209;signature`, `sim&#8209;target&#8209;url`, `sim&#8209;headers&#8209;pre`, `sim&#8209;payload&#8209;pre` |
 
 ---
 
